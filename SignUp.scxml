@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" name="SignUp" qt:editorversion="4.7.2" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" initial="waitingForSignUp">
+    <qt:editorinfo initialGeometry="273.19;58.31;-20;-20;40;40"/>
+    <final id="Final_1">
+        <qt:editorinfo geometry="273.19;374.48;-20;-20;40;40" scenegeometry="273.19;374.48;253.19;354.48;40;40"/>
+    </final>
+    <state id="waitingForSignUp">
+        <qt:editorinfo geometry="289.69;173.94;-100.50;-50;168;100" scenegeometry="289.69;173.94;189.19;123.94;168;100"/>
+        <transition type="external" event="finishSignUp" target="Final_1"/>
+    </state>
+</scxml>

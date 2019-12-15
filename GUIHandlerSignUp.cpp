@@ -2,6 +2,7 @@
 #include "ui_SignUp.h"
 #include <QMessageBox>
 #include <QPixmap>
+#include "SignUp.h"
 
 GUIHandlerSignUp::GUIHandlerSignUp(QWidget *parent) :
     QDialog(parent),
