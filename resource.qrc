@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/src">
+        <file>img/minion.png</file>
+    </qresource>
+    <qresource prefix="/bkgnd">
+        <file>background/mainBackground.jpg</file>
+    </qresource>
+</RCC>
