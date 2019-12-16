@@ -45,7 +45,8 @@ HEADERS += \
     GUIHandlerCourseMaterial.h \
     GUIHandlerCourseResult.h \
     GUIHandlerMenu.h \
-    GUIHandlerMainWindow.h
+    GUIHandlerMainWindow.h \
+    Types.h
 
 FORMS += \
     MainWindow.ui \

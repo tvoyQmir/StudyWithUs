@@ -1,77 +1,109 @@
 #include "DBManager.h"
 #include <QtSql>
 
-class DBManagerData : public QSharedData
+DBManager::DBManager()
 {
-public:
-
-};
-
-DBManager::DBManager() : data(new DBManagerData)
-{
-    QSqlDatabase dbase = QSqlDatabase::addDatabase("QSQLITE");
-        dbase.setDatabaseName("my_db.sqlite");
-        if (!dbase.open()) {
-            qDebug() << "Что-то пошло не так!";
-            //return -1;
-        }
-
-        QSqlQuery a_query;
-        // DDL query
-        QString str = "CREATE TABLE my_table ("
-                "number integer PRIMARY KEY NOT NULL, "
-                "address VARCHAR(255), "
-                "age integer"
-                ");";
-        bool b = a_query.exec(str);
-        if (!b) {
-            qDebug() << "Вроде не удается создать таблицу, провертье карманы!";
-        }
-
-        // DML
-        QString str_insert = "INSERT INTO my_table(number, address, age) "
-                "VALUES (%1, '%2', %3);";
-        str = str_insert.arg("14")
-                .arg("hello world str.")
-                .arg("37");
-        b = a_query.exec(str);
-        if (!b) {
-            qDebug() << "Кажется данные не вставляются, проверьте дверь, может она закрыта?";
-        }
-        //.....
-        if (!a_query.exec("SELECT * FROM my_table")) {
-            qDebug() << "Даже селект не получается, я пас.";
-            //return -2;
-        }
-        QSqlRecord rec = a_query.record();
-        int number = 0,
-                age = 0;
-        QString address = "";
-
-        while (a_query.next()) {
-            number = a_query.value(rec.indexOf("number")).toInt();
-            age = a_query.value(rec.indexOf("age")).toInt();
-            address = a_query.value(rec.indexOf("address")).toString();
-
-            qDebug() << "number is " << number
-                     << ". age is " << age
-                     << ". address" << address;
-        }
-}
-
-DBManager::DBManager(const DBManager &rhs) : data(rhs.data)
-{
-
-}
-
-DBManager &DBManager::operator=(const DBManager &rhs)
-{
-    if (this != &rhs)
-        data.operator=(rhs.data);
-    return *this;
+    init();
 }
 
 DBManager::~DBManager()
 {
 
+}
+
+void DBManager::init()
+{
+    QSqlDatabase dbase = QSqlDatabase::addDatabase("QSQLITE");
+    dbase.setDatabaseName("my_db.sqlite");
+    if (!dbase.open())
+    {
+        qDebug() << "Something went wrong!! Can't open data base.";
+        return ;
+    }
+
+    QSqlQuery a_query;
+
+    // DDL query
+    QString str = "CREATE TABLE CourseResults (ID integer PRIMARY KEY NOT NULL, StudentName VARCHAR(255), Rating integer);";
+    bool b = a_query.exec(str);
+    if (!b)
+    {
+        qDebug() << "Can't create table";
+    }
+}
+
+void DBManager::setData(QString studentName, int raiting)
+{
+    QSqlQuery a_query;
+    QString str_insert = "INSERT INTO CourseResults (ID, StudentName, Rating) VALUES (%1, '%2', %3);";
+
+    //TODO: generate ID
+    QString str = str_insert.arg("1")
+            .arg(studentName)
+            .arg(raiting);
+
+    bool b = a_query.exec(str);
+    if (!b)
+    {
+        qDebug() << "Cant insert data to table";
+    }
+}
+
+type::CourseResult DBManager::getBackElem()
+{
+    type::CourseResult courseResult;
+
+    QSqlQuery a_query;
+    if (!a_query.exec("SELECT * FROM CourseResults"))
+    {
+        qDebug() << "Can't select data from table";
+        return type::CourseResult(); // TODO: need default data
+    }
+
+    QSqlRecord rec = a_query.record();
+
+    while (a_query.last())
+    {
+        courseResult.id = a_query.value(rec.indexOf("ID")).toInt();
+        courseResult.studentName = a_query.value(rec.indexOf("StudentName")).toString();
+        courseResult.raiting = a_query.value(rec.indexOf("Rating")).toInt();
+
+        qDebug() << "id is " << courseResult.id << ". studentName is " <<  courseResult.studentName << ". raiting = " << courseResult.raiting;
+    }
+
+    return courseResult;
+}
+
+QVector<type::CourseResult> DBManager::getAllData()
+{
+    QVector<type::CourseResult> courseResult;
+
+    QSqlQuery a_query;
+    if (!a_query.exec("SELECT * FROM CourseResults"))
+    {
+        qDebug() << "Can't select data from table";
+        return QVector<type::CourseResult>(); // TODO: need default data
+    }
+
+    QSqlRecord rec = a_query.record();
+
+    courseResult.resize(a_query.size());
+    int count = 0;
+    while (a_query.next())
+    {
+        if (count < courseResult.size())
+        {
+            courseResult[count].id = a_query.value(rec.indexOf("ID")).toInt();
+            courseResult[count].studentName = a_query.value(rec.indexOf("StudentName")).toString();
+            courseResult[count].raiting = a_query.value(rec.indexOf("Rating")).toInt();
+            ++count;
+            qDebug() << "id is " <<  courseResult[count].id << ". studentName is " <<  courseResult[count].studentName << ". raiting = " << courseResult[count].raiting;
+        }
+        else
+        {
+           qDebug() << "count > courseResult.size()";
+        }
+    }
+
+    return courseResult;
 }

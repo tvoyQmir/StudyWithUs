@@ -1,17 +1,17 @@
 #pragma once
 #include <QObject>
-#include <QSharedDataPointer>
-
-class DBManagerData;
+#include <QVector>
+#include "Types.h"
 
 class DBManager
 {
 public:
     DBManager();
-    DBManager(const DBManager &);
-    DBManager &operator=(const DBManager &);
     ~DBManager();
 
 private:
-    QSharedDataPointer<DBManagerData> data;
+    void init();
+    void setData(QString studentName, int raiting);
+    type::CourseResult getBackElem();
+    QVector<type::CourseResult> getAllData();
 };
