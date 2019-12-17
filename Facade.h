@@ -1,17 +1,19 @@
 #pragma once
 #include <QObject>
-#include <QSharedDataPointer>
-
-class FacadeData;
+#include <QSharedPointer>
+#include "MaterialContext.h"
+#include "CourseControler.h"
+#include "DBManager.h"
 
 class Facade
 {
 public:
     Facade();
-    Facade(const Facade &);
-    Facade &operator=(const Facade &);
     ~Facade();
+    void init();
 
 private:
-    QSharedDataPointer<FacadeData> data;
+    QSharedPointer<DBManager> m_DBManager;
+    MaterialContext m_MaterialContext;
+    CourseControler m_CourseControler;
 };

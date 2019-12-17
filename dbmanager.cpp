@@ -1,18 +1,21 @@
-#include "DBManager.h"
 #include <QtSql>
+
+#include "DBManager.h"
 
 DBManager::DBManager()
 {
-    init();
+    qDebug() << "DBManager::DBManager";
 }
 
 DBManager::~DBManager()
 {
-
+    qDebug() << "DBManager::~DBManager";
 }
 
 void DBManager::init()
 {
+    qDebug() << "DBManager::init";
+
     QSqlDatabase dbase = QSqlDatabase::addDatabase("QSQLITE");
     dbase.setDatabaseName("my_db.sqlite");
     if (!dbase.open())
@@ -34,6 +37,8 @@ void DBManager::init()
 
 void DBManager::setData(QString studentName, int raiting)
 {
+    qDebug() << "DBManager::setData(" << studentName << raiting << ")";
+
     QSqlQuery a_query;
     QString str_insert = "INSERT INTO CourseResults (ID, StudentName, Rating) VALUES (%1, '%2', %3);";
 
@@ -51,6 +56,8 @@ void DBManager::setData(QString studentName, int raiting)
 
 type::CourseResult DBManager::getBackElem()
 {
+    qDebug() << "DBManager::getBackElem";
+
     type::CourseResult courseResult;
 
     QSqlQuery a_query;
@@ -76,6 +83,8 @@ type::CourseResult DBManager::getBackElem()
 
 QVector<type::CourseResult> DBManager::getAllData()
 {
+    qDebug() << "DBManager::getAllData";
+
     QVector<type::CourseResult> courseResult;
 
     QSqlQuery a_query;

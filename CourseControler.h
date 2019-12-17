@@ -1,17 +1,16 @@
 #pragma once
 #include <QObject>
-#include <QSharedDataPointer>
+#include <QSharedPointer>
 
-class CourseControlerData;
+class DBManager;
 
 class CourseControler
 {
 public:
-    CourseControler();
-    CourseControler(const CourseControler &);
-    CourseControler &operator=(const CourseControler &);
+    CourseControler(QSharedPointer<DBManager> DBManager);
     ~CourseControler();
+    void init();
 
 private:
-    QSharedDataPointer<CourseControlerData> data;
+    QSharedPointer<DBManager> m_DBManager;
 };

@@ -1,18 +1,22 @@
-#include "GUIHandlerMainWindow.h"
-#include "ui_mainwindow.h"
 #include <QMessageBox>
-#include <QPushButton>
+#include <QDebug>
 
-GUIHandlerMainWindow::GUIHandlerMainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+#include "GUIHandlerMainWindow.h"
+#include "ui_MainWindow.h"
+
+GUIHandlerMainWindow::GUIHandlerMainWindow(QSharedPointer<Facade> facade, QWidget *parent)
+    : QMainWindow(parent)
+    , m_ui(new Ui::MainWindow)
+    , m_GUIHandlerSignUpWindow(new GUIHandlerSignUp(facade))
+    , m_GUIHandleMenuWindow(new GUIHandlerMenu(facade))
+    , m_Facade(facade)
 {
-    ui->setupUi(this);
-    GUIHandleMenuWindow = new GUIHandlerMenu();
-    GUIHandlerSignUpWindow = new GUIHandlerSignUp();
+    qDebug() << "GUIHandlerMainWindow::GUIHandlerMainWindow";
 
-    connect(GUIHandleMenuWindow, &GUIHandlerMenu::GUIHandlerMenuSignal, this, &GUIHandlerMainWindow::show);
-    connect(GUIHandlerSignUpWindow, &GUIHandlerSignUp::GUIHandlerSignUpSignal, this, &GUIHandlerMainWindow::show);
+     m_ui->setupUi(this);
+
+    connect(m_GUIHandleMenuWindow.get(), &GUIHandlerMenu::GUIHandlerMenuSignal, this, &GUIHandlerMainWindow::show);
+    connect(m_GUIHandlerSignUpWindow.get(), &GUIHandlerSignUp::GUIHandlerSignUpSignal, this, &GUIHandlerMainWindow::show);
 
     QPixmap bkgnd(":/bkgnd/background/mainBackground.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
@@ -23,24 +27,28 @@ GUIHandlerMainWindow::GUIHandlerMainWindow(QWidget *parent) :
 
 GUIHandlerMainWindow::~GUIHandlerMainWindow()
 {
-    delete ui;
+    qDebug() << "GUIHandlerMainWindow::~GUIHandlerMainWindow";
 }
 
 void GUIHandlerMainWindow::on_Sign_up_clicked()
 {
+    qDebug() << "GUIHandlerMainWindow::on_Sign_up_clicked";
+
     this->close();
-    GUIHandlerSignUpWindow->show();
+    m_GUIHandlerSignUpWindow->show();
 }
 
 void GUIHandlerMainWindow::on_Sign_in_clicked()
 {
-    QString login = ui->login->text();
+    qDebug() << "GUIHandlerMainWindow::on_Sign_in_clicked";
+
+    QString login = m_ui->login->text();
     QString password;
     const bool result = true; /*dbMng.find(ui->pass->text())*/
 
     if (result)
     {
-        password = ui->pass->text();
+        password = m_ui->pass->text();
     }
     else
     {
@@ -48,5 +56,5 @@ void GUIHandlerMainWindow::on_Sign_in_clicked()
     }
 
     this->close();
-    GUIHandleMenuWindow->show();
+    m_GUIHandleMenuWindow->show();
 }

@@ -1,5 +1,8 @@
 #pragma once
 #include <QDialog>
+#include <QSharedPointer>
+
+class Facade;
 
 namespace Ui {
 class GUIHandlerCourseMaterial;
@@ -10,7 +13,7 @@ class GUIHandlerCourseMaterial : public QDialog
     Q_OBJECT
 
 public:
-    explicit GUIHandlerCourseMaterial(QWidget *parent = nullptr);
+    explicit GUIHandlerCourseMaterial(QSharedPointer<Facade> facade, QWidget *parent = nullptr);
     ~GUIHandlerCourseMaterial();
 
 signals:
@@ -22,5 +25,7 @@ private slots:
     void on_backToCourseMenu_clicked();
 
 private:
-    Ui::GUIHandlerCourseMaterial *ui;
+    QSharedPointer<Ui::GUIHandlerCourseMaterial> m_ui;
+    QSharedPointer<Facade> m_Facade;
+
 };

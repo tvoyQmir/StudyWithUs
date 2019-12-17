@@ -1,15 +1,19 @@
-#include "GUIHandlerSignUp.h"
-#include "ui_SignUp.h"
 #include <QMessageBox>
 #include <QPixmap>
+#include <QDebug>
+
+#include "GUIHandlerSignUp.h"
+#include "ui_SignUp.h"
 #include "SignUp.h"
 
-GUIHandlerSignUp::GUIHandlerSignUp(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::SignUp),
-    GUIHandlerMenuWindow(new GUIHandlerMenu())
+GUIHandlerSignUp::GUIHandlerSignUp(QSharedPointer<Facade> facade, QWidget *parent)
+    : QDialog(parent)
+    , m_ui(new Ui::SignUp)
+    , m_GUIHandlerMenuWindow(new GUIHandlerMenu(facade))
+    , m_Facade(facade)
 {
-    ui->setupUi(this);
+    qDebug() << "GUIHandlerSignUp::GUIHandlerSignUp";
+    m_ui->setupUi(this);
 
     QPixmap bkgnd(":/bkgnd/background/mainBackground.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
@@ -18,35 +22,39 @@ GUIHandlerSignUp::GUIHandlerSignUp(QWidget *parent) :
     this->setPalette(palette);
 
     QPixmap pix(":/src/img/minion.png");
-    int w = ui->minion_label->width();
-    int h = ui->minion_label->height();
-    ui->minion_label->setPixmap(pix.scaled(w, h, Qt::KeepAspectRatio));
+    int width = m_ui->minion_label->width();
+    int height = m_ui->minion_label->height();
+    m_ui->minion_label->setPixmap(pix.scaled(width, height, Qt::KeepAspectRatio));
 }
 
 GUIHandlerSignUp::~GUIHandlerSignUp()
 {
-    delete ui;
+    qDebug() << "GUIHandlerSignUp::GUIHandlerSignUp";
 }
 
 void GUIHandlerSignUp::on_signUpButton_clicked()
 {
-    QString login = ui->login->text();
+    qDebug() << "GUIHandlerSignUp::on_signUpButton_clicked";
+
+    QString login = m_ui->login->text();
     QString password;
 
-    if (ui->pass_1->text() == ui->pass_2->text())
+    if (m_ui->pass_1->text() == m_ui->pass_2->text())
     {
-        password = ui->pass_1->text();
+        password = m_ui->pass_1->text();
     }
     else
     {
         QMessageBox::warning(this, "Sign up", "Passwords not equals");
     }
     this->close();
-    GUIHandlerMenuWindow->show();
+    m_GUIHandlerMenuWindow->show();
 }
 
 void GUIHandlerSignUp::on_back_clicked()
 {
+    qDebug() << "GUIHandlerSignUp::on_back_clicked";
+
     this->close();
     emit GUIHandlerSignUpSignal();
 }

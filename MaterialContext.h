@@ -1,17 +1,16 @@
 #pragma once
 #include <QObject>
-#include <QSharedDataPointer>
+#include <QSharedPointer>
 
-class MaterialContextData;
+class DBManager;
 
 class MaterialContext
 {
 public:
-    MaterialContext();
-    MaterialContext(const MaterialContext &);
-    MaterialContext &operator=(const MaterialContext &);
+    MaterialContext(QSharedPointer<DBManager> DBManager);
     ~MaterialContext();
+    void init();
 
 private:
-    QSharedDataPointer<MaterialContextData> data;
+    QSharedPointer<DBManager> m_DBManager;
 };

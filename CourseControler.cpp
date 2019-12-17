@@ -1,29 +1,20 @@
+#include <QDebug>
+
 #include "CourseControler.h"
 
-class CourseControlerData : public QSharedData
+CourseControler::CourseControler(QSharedPointer<DBManager> DBManager)
+    : m_DBManager(DBManager)
 {
-public:
-
-};
-
-CourseControler::CourseControler() : data(new CourseControlerData)
-{
-
-}
-
-CourseControler::CourseControler(const CourseControler &rhs) : data(rhs.data)
-{
-
-}
-
-CourseControler &CourseControler::operator=(const CourseControler &rhs)
-{
-    if (this != &rhs)
-        data.operator=(rhs.data);
-    return *this;
+    qDebug() << "CourseControler::CourseControler";
 }
 
 CourseControler::~CourseControler()
 {
+    qDebug() << "CourseControler::~CourseControler";
+}
 
+void CourseControler::init()
+{
+    qDebug() << "CourseControler::init";
+    //TODO
 }

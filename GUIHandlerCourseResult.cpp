@@ -1,11 +1,15 @@
+#include <QDebug>
+
 #include "GUIHandlerCourseResult.h"
 #include "ui_CourseResult.h"
 
-GUIHandlerCourseResult::GUIHandlerCourseResult(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::GUIHandlerCourseResult)
+GUIHandlerCourseResult::GUIHandlerCourseResult(QSharedPointer<Facade> facade, QWidget *parent)
+    : QDialog(parent)
+    , m_ui(new Ui::GUIHandlerCourseResult)
+    , m_Facade(facade)
 {
-    ui->setupUi(this);
+    qDebug() << "GUIHandlerCourseResult::GUIHandlerCourseResult";
+    m_ui->setupUi(this);
 
     QPixmap bkgnd(":/bkgnd/background/mainBackground.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
@@ -16,11 +20,13 @@ GUIHandlerCourseResult::GUIHandlerCourseResult(QWidget *parent) :
 
 GUIHandlerCourseResult::~GUIHandlerCourseResult()
 {
-    delete ui;
+    qDebug() << "GUIHandlerCourseResult::~GUIHandlerCourseResult";
 }
 
 void GUIHandlerCourseResult::on_backToCourseMenu_clicked()
 {
+    qDebug() << "GUIHandlerCourseResult::on_backToCourseMenu_clicked";
+
     this->close();
     emit GUIHandlerCourseResultSignal();
 }

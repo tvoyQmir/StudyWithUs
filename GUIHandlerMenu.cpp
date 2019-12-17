@@ -1,16 +1,21 @@
+#include <QDebug>
+
 #include "GUIHandlerMenu.h"
 #include "ui_CourseMenu.h"
 
-GUIHandlerMenu::GUIHandlerMenu(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::CourseMenu),
-    GUIHandlerCourseResultWindow(new GUIHandlerCourseResult()),
-    GUIHandlerCourseMaterialWindow(new GUIHandlerCourseMaterial())
+GUIHandlerMenu::GUIHandlerMenu(QSharedPointer<Facade> facade, QWidget *parent)
+    : QDialog(parent)
+    , m_ui(new Ui::CourseMenu)
+    , m_GUIHandlerCourseResultWindow(new GUIHandlerCourseResult(facade))
+    , m_GUIHandlerCourseMaterialWindow(new GUIHandlerCourseMaterial(facade))
+    , m_Facade(facade)
 {
-    ui->setupUi(this);
+     qDebug() << "GUIHandlerMenu::GUIHandlerMenu";
 
-    connect(GUIHandlerCourseMaterialWindow, &GUIHandlerCourseMaterial::GUIHandlerCourseMaterialSignal, this, &GUIHandlerMenu::show);
-    connect(GUIHandlerCourseResultWindow, &GUIHandlerCourseResult::GUIHandlerCourseResultSignal, this, &GUIHandlerMenu::show);
+    m_ui->setupUi(this);
+
+    connect(m_GUIHandlerCourseMaterialWindow.get(), &GUIHandlerCourseMaterial::GUIHandlerCourseMaterialSignal, this, &GUIHandlerMenu::show);
+    connect(m_GUIHandlerCourseResultWindow.get(), &GUIHandlerCourseResult::GUIHandlerCourseResultSignal, this, &GUIHandlerMenu::show);
 
     QPixmap bkgnd(":/bkgnd/background/mainBackground.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
@@ -21,17 +26,21 @@ GUIHandlerMenu::GUIHandlerMenu(QWidget *parent) :
 
 GUIHandlerMenu::~GUIHandlerMenu()
 {
-    delete ui;
+    qDebug() << "GUIHandlerMenu::~GUIHandlerMenu";
 }
 
 void GUIHandlerMenu::on_startCourse_clicked()
 {
+    qDebug() << "GUIHandlerMenu::on_startCourse_clicked";
+
     this->close();
-    GUIHandlerCourseMaterialWindow->show();
+    m_GUIHandlerCourseMaterialWindow->show();
 }
 
 void GUIHandlerMenu::on_viewCourseResult_clicked()
 {
+    qDebug() << "GUIHandlerMenu::on_viewCourseResult_clicked";
+
     this->close();
-    GUIHandlerCourseResultWindow->show();
+    m_GUIHandlerCourseResultWindow->show();
 }
