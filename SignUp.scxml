@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" name="SignUp" qt:editorversion="4.7.2" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" initial="waitingForSignUp">
-    <qt:editorinfo initialGeometry="273.19;58.31;-20;-20;40;40"/>
+<scxml xmlns="http://www.w3.org/2005/07/scxml" version="1.0" binding="early" xmlns:qt="http://www.qt.io/2015/02/scxml-ext" name="SignUp" qt:editorversion="4.7.2" datamodel="SignUpData" initial="waitingForEnterData">
+    <qt:editorinfo initialGeometry="57.31;77.77;-20;-20;40;40"/>
     <final id="Final_1">
-        <qt:editorinfo geometry="273.19;374.48;-20;-20;40;40" scenegeometry="273.19;374.48;253.19;354.48;40;40"/>
+        <qt:editorinfo scenegeometry="57.31;398.02;37.31;378.02;40;40" geometry="57.31;398.02;-20;-20;40;40"/>
     </final>
-    <state id="waitingForSignUp">
-        <qt:editorinfo geometry="289.69;173.94;-100.50;-50;168;100" scenegeometry="289.69;173.94;189.19;123.94;168;100"/>
-        <transition type="external" event="finishSignUp" target="Final_1"/>
+    <state id="waitingForConfirmation">
+        <qt:editorinfo scenegeometry="732.51;398.02;611.51;348.02;209;100" geometry="732.51;398.02;-121;-50;209;100"/>
+        <transition type="external" event="finishSignUp" target="Final_1" cond="true == checkRulesForReg"/>
+        <transition type="external" event="reEnterData" target="waitingForEnterData" cond="true == checkRulesForReg">
+            <qt:editorinfo localGeometry="-396.31;0" endTargetFactors="23.61;89.70" movePoint="4.09;-21.49" startTargetFactors="4.18;30.60"/>
+        </transition>
+    </state>
+    <state id="waitingForCheckData">
+        <qt:editorinfo scenegeometry="740.76;77.77;595.76;27.77;240.50;100" geometry="740.76;77.77;-145;-50;240.50;100"/>
+        <transition type="external" event="cfmData" target="waitingForConfirmation" cond="true == resultOfCheckData"/>
+        <onentry>
+            <send event="checkData"/>
+        </onentry>
+        <transition type="external" event="reEnterData" target="waitingForEnterData" cond="false == resultOfCheckData">
+            <qt:editorinfo localGeometry="0;131.89;-355.91;131.89" endTargetFactors="55.04;83.53" startTargetFactors="17.76;87.94"/>
+        </transition>
+    </state>
+    <state id="waitingForEnterData">
+        <qt:editorinfo scenegeometry="273.19;77.77;180.19;27.77;186;100" geometry="273.19;77.77;-93;-50;186;100"/>
+        <transition type="external" event="sendData" target="waitingForCheckData" cond="true == dataWasEntered">
+            <qt:editorinfo endTargetFactors="3.83;49.13"/>
+        </transition>
     </state>
 </scxml>

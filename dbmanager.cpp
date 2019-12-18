@@ -27,20 +27,45 @@ void DBManager::init()
     QSqlQuery a_query;
 
     // DDL query
-    QString str = "CREATE TABLE CourseResults (ID integer PRIMARY KEY NOT NULL, StudentName VARCHAR(255), Rating integer);";
+    QString str = "CREATE TABLE CourseResults (id integer PRIMARY KEY NOT NULL, name VARCHAR(255), rating integer);";
     bool b = a_query.exec(str);
     if (!b)
     {
-        qDebug() << "Can't create table";
+        qDebug() << "Can't create table CourseResults";
+        return;
+    }
+
+    str = "CREATE TABLE Accounts (id integer PRIMARY KEY NOT NULL, login VARCHAR(255), password VARCHAR(255));";
+    b = a_query.exec(str);
+    if (!b)
+    {
+        qDebug() << "Can't create table Accounts";
+        return;
+    }
+
+    str = "CREATE TABLE EducationMaterial (id integer PRIMARY KEY NOT NULL, topic VARCHAR(255), data VARCHAR(255), complexity integer);";
+    b = a_query.exec(str);
+    if (!b)
+    {
+        qDebug() << "Can't create table EducationMaterial";
+        return;
+    }
+
+    str = "CREATE TABLE Tasks (id integer PRIMARY KEY NOT NULL, topic VARCHAR(255), data VARCHAR(255), complexity integer);";
+    b = a_query.exec(str);
+    if (!b)
+    {
+        qDebug() << "Can't create table Tasks";
+        return;
     }
 }
 
-void DBManager::setData(QString studentName, int raiting)
+void DBManager::setDataIntoCourseResults(QString studentName, int raiting)
 {
     qDebug() << "DBManager::setData(" << studentName << raiting << ")";
 
     QSqlQuery a_query;
-    QString str_insert = "INSERT INTO CourseResults (ID, StudentName, Rating) VALUES (%1, '%2', %3);";
+    QString str_insert = "INSERT INTO CourseResults (id, name, rating) VALUES (%1, '%2', %3);";
 
     //TODO: generate ID
     QString str = str_insert.arg("1")
@@ -54,7 +79,7 @@ void DBManager::setData(QString studentName, int raiting)
     }
 }
 
-type::CourseResult DBManager::getBackElem()
+type::CourseResult DBManager::getLastElemFromCourseResults()
 {
     qDebug() << "DBManager::getBackElem";
 
@@ -71,9 +96,9 @@ type::CourseResult DBManager::getBackElem()
 
     while (a_query.last())
     {
-        courseResult.id = a_query.value(rec.indexOf("ID")).toInt();
-        courseResult.studentName = a_query.value(rec.indexOf("StudentName")).toString();
-        courseResult.raiting = a_query.value(rec.indexOf("Rating")).toInt();
+        courseResult.id = a_query.value(rec.indexOf("id")).toInt();
+        courseResult.studentName = a_query.value(rec.indexOf("name")).toString();
+        courseResult.raiting = a_query.value(rec.indexOf("rating")).toInt();
 
         qDebug() << "id is " << courseResult.id << ". studentName is " <<  courseResult.studentName << ". raiting = " << courseResult.raiting;
     }
@@ -81,7 +106,7 @@ type::CourseResult DBManager::getBackElem()
     return courseResult;
 }
 
-QVector<type::CourseResult> DBManager::getAllData()
+QVector<type::CourseResult> DBManager::getAllDataFromCourseResults()
 {
     qDebug() << "DBManager::getAllData";
 
@@ -102,9 +127,9 @@ QVector<type::CourseResult> DBManager::getAllData()
     {
         if (count < courseResult.size())
         {
-            courseResult[count].id = a_query.value(rec.indexOf("ID")).toInt();
-            courseResult[count].studentName = a_query.value(rec.indexOf("StudentName")).toString();
-            courseResult[count].raiting = a_query.value(rec.indexOf("Rating")).toInt();
+            courseResult[count].id = a_query.value(rec.indexOf("id")).toInt();
+            courseResult[count].studentName = a_query.value(rec.indexOf("name")).toString();
+            courseResult[count].raiting = a_query.value(rec.indexOf("rating")).toInt();
             ++count;
             qDebug() << "id is " <<  courseResult[count].id << ". studentName is " <<  courseResult[count].studentName << ". raiting = " << courseResult[count].raiting;
         }
@@ -115,4 +140,49 @@ QVector<type::CourseResult> DBManager::getAllData()
     }
 
     return courseResult;
+}
+
+void DBManager::setDataIntoAccounts(QString login, QString password)
+{
+    qDebug() << login << password;
+}
+
+type::Account DBManager::getLastElemFromAccounts()
+{
+    return type::Account();
+}
+
+QVector<type::Account> DBManager::getAllDataFromAccounts()
+{
+    return QVector<type::Account>();
+}
+
+void DBManager::setDataIntoEducationMaterial(QString topic, QString data, int complexity)
+{
+    qDebug() << topic << data << complexity;
+}
+
+type::EducationMaterial DBManager::getLastElemFromEducationMaterial()
+{
+    return type::EducationMaterial();
+}
+
+QVector<type::EducationMaterial> DBManager::getAllDataFromEducationMaterial()
+{
+    return QVector<type::EducationMaterial>();
+}
+
+void DBManager::setDataIntoTasks(QString topic, QString data, int complexity)
+{
+    qDebug() << topic << data << complexity;
+}
+
+type::Task DBManager::getLastElemFromTasks()
+{
+    return type::Task();
+}
+
+QVector<type::Task> DBManager::getAllDataFromTasks()
+{
+    return QVector<type::Task>();
 }
