@@ -36,19 +36,37 @@ void GUIHandlerSignUp::on_signUpButton_clicked()
 {
     qDebug() << "GUIHandlerSignUp::on_signUpButton_clicked";
 
-    QString login = m_ui->login->text();
-    QString password;
-
+    const QString login = m_ui->login->text();
     if (m_ui->pass_1->text() == m_ui->pass_2->text())
     {
-        password = m_ui->pass_1->text();
+        const QVector<type::Account> accounts = m_Facade->getAllDataFromAccounts();
+        bool existInDB = false;
+
+        foreach(const auto& account, accounts)
+        {
+            if (account.login == login)
+            {
+                existInDB = true;
+            }
+        }
+
+        if(!existInDB)
+        {
+            qDebug() << "set registration data into DB";
+            m_Facade->setDataIntoAccounts(/*login*/ m_ui->login->text(), /*password*/ m_ui->pass_1->text());
+
+            this->close();
+            m_GUIHandlerMenuWindow->show();
+        }
+        else
+        {
+            QMessageBox::warning(this, "Sign up", "This login was registered");
+        }
     }
     else
     {
         QMessageBox::warning(this, "Sign up", "Passwords not equals");
     }
-    this->close();
-    m_GUIHandlerMenuWindow->show();
 }
 
 void GUIHandlerSignUp::on_back_clicked()

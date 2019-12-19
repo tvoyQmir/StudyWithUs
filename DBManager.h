@@ -22,6 +22,10 @@ public:
     type::Account getLastElemFromAccounts();
     QVector<type::Account> getAllDataFromAccounts();
 
+     /**
+       * TODO
+       **/
+
     // EducationMaterial
     void setDataIntoEducationMaterial(QString topic, QString data /*TODO struct for material*/, int complexity);
     type::EducationMaterial getLastElemFromEducationMaterial();
@@ -33,4 +37,5 @@ public:
     QVector<type::Task> getAllDataFromTasks();
 
 private:
+    int m_id; //TODO gen ID
 };

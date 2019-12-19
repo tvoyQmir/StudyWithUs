@@ -23,3 +23,21 @@ void Facade::init()
     m_MaterialContext.init();
     m_CourseControler.init();
 }
+
+void Facade::setDataIntoAccounts(QString login, QString password)
+{
+    qDebug() << "Facade::setDataIntoAccounts(" << login << password << ")"; // TODO log and pass encryption
+    m_DBManager->setDataIntoAccounts(login, password);
+}
+
+type::Account Facade::getLastElemFromAccounts() const
+{
+    qDebug() << "Facade::getLastElemFromAccounts";
+    return m_DBManager->getLastElemFromAccounts();
+}
+
+QVector<type::Account> Facade::getAllDataFromAccounts() const
+{
+    qDebug() << "Facade::getAllDataFromAccounts";
+    return m_DBManager->getAllDataFromAccounts();
+}
