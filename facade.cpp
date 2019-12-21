@@ -24,7 +24,7 @@ void Facade::init()
     m_CourseControler.init();
 }
 
-void Facade::setDataIntoAccounts(QString login, QString password)
+void Facade::setDataIntoAccounts(const QString& login, const QString& password)
 {
     qDebug() << "Facade::setDataIntoAccounts(" << login << password << ")"; // TODO log and pass encryption
     m_DBManager->setDataIntoAccounts(login, password);
@@ -40,4 +40,22 @@ QVector<type::Account> Facade::getAllDataFromAccounts() const
 {
     qDebug() << "Facade::getAllDataFromAccounts";
     return m_DBManager->getAllDataFromAccounts();
+}
+
+bool Facade::checkData(const QString &login, const QString &password)
+{
+    qDebug() << "Facade::checkData(" << login << password <<")";
+    return m_DBManager->checkData(login, password);
+}
+
+bool Facade::isExistInAccountsTable(const QString& login)
+{
+    qDebug() << "Facade::isExistInAccountsTable(" << login << ")";
+    return m_DBManager->isExistInAccountsTable(login);
+}
+
+QString Facade::getActiveAccount()
+{
+    qDebug() << "Facade::getActiveAccount";
+    return m_DBManager->getActiveAccount();
 }

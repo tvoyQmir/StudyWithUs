@@ -2,7 +2,7 @@
 #include <QDialog>
 #include <QSharedPointer>
 
-#include "GUIHandlerMenu.h"
+#include "SignUp.h"
 #include "Facade.h"
 
 namespace Ui {
@@ -25,7 +25,13 @@ private slots:
     void on_back_clicked();
 
 private:
+    void init();
+    bool isValidData(const QString& login, const QString& password1, const QString& password2);
+
+    SignUp m_FSMSignUp;
+
     QSharedPointer<Ui::SignUp> m_ui;
-    QSharedPointer<GUIHandlerMenu> m_GUIHandlerMenuWindow;
     QSharedPointer<Facade> m_Facade;
+
+
 };

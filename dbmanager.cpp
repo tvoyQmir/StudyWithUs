@@ -110,7 +110,7 @@ type::CourseResult DBManager::getLastElemFromCourseResults()
 QVector<type::CourseResult> DBManager::getAllDataFromCourseResults()
 {
     qDebug() << "DBManager::getAllData";
-
+/*
     QVector<type::CourseResult> courseResult;
 
     QSqlQuery a_query;
@@ -139,11 +139,11 @@ QVector<type::CourseResult> DBManager::getAllDataFromCourseResults()
            qDebug() << "count > courseResult.size()";
         }
     }
-
-    return courseResult;
+*/
+    return QVector<type::CourseResult> ();
 }
 
-void DBManager::setDataIntoAccounts(QString login, QString password)
+void DBManager::setDataIntoAccounts(const QString& login, const QString& password)
 {
     qDebug() << "DBManager::setDataIntoAccounts(" << login << password << ")"; // TODO log and pass encryption
 
@@ -162,7 +162,7 @@ void DBManager::setDataIntoAccounts(QString login, QString password)
 
     a_query.last();
     id = a_query.value(rec.indexOf("id")).toInt() + 1;
-    qDebug() << id;
+    qDebug() << "id is" << id;
 
     QString str = str_insert.arg(id).arg(login).arg(password);
     bool b = a_query.exec(str);
@@ -200,10 +200,10 @@ type::Account DBManager::getLastElemFromAccounts()
 
 QVector<type::Account> DBManager::getAllDataFromAccounts()
 {
-
     qDebug() << "DBManager::getAllDataFromAccounts";
 
     QVector<type::Account> accounts;
+    type::Account account;
 
     QSqlQuery a_query;
     if (!a_query.exec("SELECT * FROM Accounts"))
@@ -214,34 +214,67 @@ QVector<type::Account> DBManager::getAllDataFromAccounts()
 
     QSqlRecord rec = a_query.record();
 
-    if (0 < a_query.size())
-    {
-        accounts.resize(a_query.size());
-    }
-    else
-    {
-        qDebug() << "a_query is null";
-        return QVector<type::Account>();
-    }
-
-    int count = 0;
     while (a_query.next())
     {
-        if (count < accounts.size())
+        const int id = a_query.value(rec.indexOf("id")).toInt();
+        const QString login = a_query.value(rec.indexOf("login")).toString();
+        const QString password = a_query.value(rec.indexOf("password")).toString();
+
+        qDebug() << "| id is " <<  id
+                 << "| login is " << login
+                 << "| password is " << password
+                 << "|";
+
+        account.id = id;
+        account.login = login;
+        account.password = password;
+        accounts.push_back(account);
+    }
+    return accounts;
+}
+
+bool DBManager::checkData(const QString &login, const QString &password)
+{
+    const QVector<type::Account> accounts = this->getAllDataFromAccounts();
+
+    bool succes = false;
+
+    foreach(const auto& account, accounts)
+    {
+        if (account.login == login && account.password == password)
         {
-            accounts[count].id = a_query.value(rec.indexOf("id")).toInt();
-            accounts[count].login = a_query.value(rec.indexOf("login")).toString();
-            accounts[count].password = a_query.value(rec.indexOf("password")).toString();
-            qDebug() << "id is " <<  accounts[count].id << ". studentName is " <<  accounts[count].login << ". raiting = " << accounts[count].password;
-            ++count;
-        }
-        else
-        {
-           qDebug() << "count > courseResult.size()";
+            succes = true;
+            m_ActiveAccount = account;
         }
     }
 
-    return accounts;
+    return succes;
+}
+
+bool DBManager::isExistInAccountsTable(const QString& login)
+{
+    qDebug() << "DBManager::findInAccountsTable(" << login << ")";
+
+    const QVector<type::Account> accounts = this->getAllDataFromAccounts();
+
+    bool existInDB = false;
+
+    foreach(const auto& account, accounts)
+    {
+        if (account.login == login)
+        {
+           qDebug() << "Such login already exists";
+           existInDB = true;
+        }
+    }
+
+    return existInDB;
+}
+
+QString DBManager::getActiveAccount()
+{
+    qDebug() << "DBManager::getActiveAccount";
+    return m_ActiveAccount.login;
 }
 
 void DBManager::setDataIntoEducationMaterial(QString topic, QString data, int complexity)

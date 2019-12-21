@@ -13,9 +13,12 @@ public:
     void init();
 
     // Accounts
-    void setDataIntoAccounts(QString login, QString password);
+    void setDataIntoAccounts(const QString& login, const QString& password);
     type::Account getLastElemFromAccounts() const;
     QVector<type::Account> getAllDataFromAccounts() const;
+    bool checkData(const QString& login, const QString& password);
+    bool isExistInAccountsTable(const QString& login);
+    QString getActiveAccount(); // TODO
 
 private:
     QSharedPointer<DBManager> m_DBManager;

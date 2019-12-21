@@ -18,9 +18,12 @@ public:
     QVector<type::CourseResult> getAllDataFromCourseResults();
 
     // Accounts
-    void setDataIntoAccounts(QString login, QString password);
+    void setDataIntoAccounts(const QString& login, const QString& password);
     type::Account getLastElemFromAccounts();
     QVector<type::Account> getAllDataFromAccounts();
+    bool checkData(const QString& login, const QString& password);
+    bool isExistInAccountsTable(const QString& login);
+    QString getActiveAccount(); // TODO
 
      /**
        * TODO
@@ -38,4 +41,5 @@ public:
 
 private:
     int m_id; //TODO gen ID
+    type::Account m_ActiveAccount;
 };

@@ -10,6 +10,7 @@ GUIHandlerMainWindow::GUIHandlerMainWindow(QSharedPointer<Facade> facade, QWidge
     , m_GUIHandlerSignUpWindow(new GUIHandlerSignUp(facade))
     , m_GUIHandleMenuWindow(new GUIHandlerMenu(facade))
     , m_Facade(facade)
+    , m_activeAccount("")
 {
     qDebug() << "GUIHandlerMainWindow::GUIHandlerMainWindow";
 
@@ -42,19 +43,21 @@ void GUIHandlerMainWindow::on_Sign_in_clicked()
 {
     qDebug() << "GUIHandlerMainWindow::on_Sign_in_clicked";
 
-    QString login = m_ui->login->text();
-    QString password;
-    const bool result = true; /*dbMng.find(ui->pass->text())*/
+    const QString login = m_ui->login->text();
+    const QString password = m_ui->pass->text();
+
+    const bool result = m_Facade->checkData(login, password);
 
     if (result)
     {
-        password = m_ui->pass->text();
+        qDebug() << "successfully logged";
+        QMessageBox::information(this, "Sign in", "You have successfully logged into your account"); //TODO add timeot on all messageBox
+
+        this->close();
+        m_GUIHandleMenuWindow->show();
     }
     else
     {
-        QMessageBox::warning(this, "Sign up", "Passwords not equals");
+        QMessageBox::warning(this, "Sign in", "You are not registered. Click on 'Sign Up' button, if you want to register");
     }
-
-    this->close();
-    m_GUIHandleMenuWindow->show();
 }

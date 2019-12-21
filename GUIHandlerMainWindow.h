@@ -29,4 +29,6 @@ private:
     QSharedPointer<GUIHandlerSignUp> m_GUIHandlerSignUpWindow;
     QSharedPointer<GUIHandlerMenu> m_GUIHandleMenuWindow;
     QSharedPointer<Facade> m_Facade;
+
+    QString m_activeAccount;
 };
