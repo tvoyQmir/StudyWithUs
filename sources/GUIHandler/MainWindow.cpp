@@ -19,7 +19,7 @@ MainWindow::MainWindow(QSharedPointer<Facade> facade, QWidget *parent)
     connect(m_GUIHandleMenuWindow.get(), &Menu::GUIHandlerMenuSignal, this, &MainWindow::show);
     connect(m_GUIHandlerSignUpWindow.get(), &SignUp::GUIHandlerSignUpSignal, this, &MainWindow::show);
 
-    QPixmap bkgnd(":/bkgnd/background/mainBackground.jpg");
+    QPixmap bkgnd(":/bkgnd/img/background/mainBackground.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Background, bkgnd);

@@ -12,7 +12,7 @@ CourseMaterial::CourseMaterial(QSharedPointer<Facade> facade, QWidget *parent)
 
     m_ui->setupUi(this);
 
-    QPixmap bkgnd(":/bkgnd/background/mainBackground.jpg");
+    QPixmap bkgnd(":/bkgnd/img/background/mainBackground.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Background, bkgnd);

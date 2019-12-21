@@ -79,7 +79,7 @@ void SignUp::init()
         emit GUIHandlerSignUpSignal();
     }));
 
-    QPixmap bkgnd(":/bkgnd/background/mainBackground.jpg");
+    QPixmap bkgnd(":/bkgnd/img/background/mainBackground.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Background, bkgnd);

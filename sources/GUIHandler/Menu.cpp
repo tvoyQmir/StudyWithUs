@@ -17,7 +17,7 @@ Menu::Menu(QSharedPointer<Facade> facade, QWidget *parent)
     connect(m_GUIHandlerCourseMaterialWindow.get(), &CourseMaterial::GUIHandlerCourseMaterialSignal, this, &Menu::show);
     connect(m_GUIHandlerCourseResultWindow.get(), &CourseResult::GUIHandlerCourseResultSignal, this, &Menu::show);
 
-    QPixmap bkgnd(":/bkgnd/background/mainBackground.jpg");
+    QPixmap bkgnd(":/bkgnd/img/background/mainBackground.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Background, bkgnd);

@@ -3,6 +3,6 @@
         <file>img/minion.png</file>
     </qresource>
     <qresource prefix="/bkgnd">
-        <file>background/mainBackground.jpg</file>
+        <file>img/background/mainBackground.jpg</file>
     </qresource>
 </RCC>

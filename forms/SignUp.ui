@@ -109,10 +109,10 @@
   <widget class="QLabel" name="minion_label">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>20</y>
-     <width>151</width>
-     <height>201</height>
+     <x>380</x>
+     <y>10</y>
+     <width>341</width>
+     <height>391</height>
     </rect>
    </property>
    <property name="text">
