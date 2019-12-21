@@ -2,8 +2,8 @@
 #include <QApplication>
 #include <QSharedPointer>
 
-#include "GUIHandlerMainWindow.h"
-#include "Facade.h"
+#include "headers/GUIHandler/MainWindow.h"
+#include "headers/Facade.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     QSharedPointer<Facade> facade(new Facade);
     facade->init();
 
-    GUIHandlerMainWindow mainWindow(facade);
+    MainWindow mainWindow(facade);
     mainWindow.show();
 
     return a.exec();

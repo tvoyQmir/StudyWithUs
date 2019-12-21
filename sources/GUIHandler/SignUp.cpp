@@ -2,11 +2,10 @@
 #include <QPixmap>
 #include <QDebug>
 
-#include "GUIHandlerSignUp.h"
+#include "headers/GUIHandler/SignUp.h"
 #include "ui_SignUp.h"
-#include "SignUp.h"
 
-GUIHandlerSignUp::GUIHandlerSignUp(QSharedPointer<Facade> facade, QWidget *parent)
+SignUp::SignUp(QSharedPointer<Facade> facade, QWidget *parent)
     : QDialog(parent)
     , m_ui(new Ui::SignUp)
     , m_Facade(facade)
@@ -15,13 +14,13 @@ GUIHandlerSignUp::GUIHandlerSignUp(QSharedPointer<Facade> facade, QWidget *paren
     init();
 }
 
-GUIHandlerSignUp::~GUIHandlerSignUp()
+SignUp::~SignUp()
 {
     qDebug() << "GUIHandlerSignUp::GUIHandlerSignUp";
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void GUIHandlerSignUp::on_signUpButton_clicked()
+void SignUp::on_signUpButton_clicked()
 {
     qDebug() << "GUIHandlerSignUp::on_signUpButton_clicked";
 
@@ -44,7 +43,7 @@ void GUIHandlerSignUp::on_signUpButton_clicked()
     }
 }
 
-void GUIHandlerSignUp::on_back_clicked()
+void SignUp::on_back_clicked()
 {
     qDebug() << "GUIHandlerSignUp::on_back_clicked";
 
@@ -53,7 +52,7 @@ void GUIHandlerSignUp::on_back_clicked()
 }
 
 //---------------------------------------------------------------------------------------------------------------------
-void GUIHandlerSignUp::init()
+void SignUp::init()
 {
     m_ui->setupUi(this);
     m_FSMSignUp.init();
@@ -92,7 +91,7 @@ void GUIHandlerSignUp::init()
     m_ui->minion_label->setPixmap(pix.scaled(width, height, Qt::KeepAspectRatio));
 }
 
-bool GUIHandlerSignUp::isValidData(const QString& login, const QString& password1, const QString& password2)
+bool SignUp::isValidData(const QString& login, const QString& password1, const QString& password2)
 {
     qDebug() << "GUIHandlerSignUp::isValidData(" << login << password1 << password2 << ")";
 

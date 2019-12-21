@@ -5,16 +5,16 @@
 class Facade;
 
 namespace Ui {
-class GUIHandlerCourseMaterial;
+class CourseMaterial;
 }
 
-class GUIHandlerCourseMaterial : public QDialog
+class CourseMaterial : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit GUIHandlerCourseMaterial(QSharedPointer<Facade> facade, QWidget *parent = nullptr);
-    ~GUIHandlerCourseMaterial();
+    explicit CourseMaterial(QSharedPointer<Facade> facade, QWidget *parent = nullptr);
+    ~CourseMaterial();
 
 signals:
     void GUIHandlerCourseMaterialSignal();
@@ -25,7 +25,7 @@ private slots:
     void on_backToCourseMenu_clicked();
 
 private:
-    QSharedPointer<Ui::GUIHandlerCourseMaterial> m_ui;
+    QSharedPointer<Ui::CourseMaterial> m_ui;
     QSharedPointer<Facade> m_Facade;
 
 };

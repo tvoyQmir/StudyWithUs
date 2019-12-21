@@ -1,11 +1,11 @@
 #include <QDebug>
 
-#include "GUIHandlerCourseMaterial.h"
+#include "headers/GUIHandler/CourseMaterial.h"
 #include "ui_CourseMaterial.h"
 
-GUIHandlerCourseMaterial::GUIHandlerCourseMaterial(QSharedPointer<Facade> facade, QWidget *parent)
+CourseMaterial::CourseMaterial(QSharedPointer<Facade> facade, QWidget *parent)
     : QDialog(parent)
-    , m_ui(new Ui::GUIHandlerCourseMaterial)
+    , m_ui(new Ui::CourseMaterial)
     , m_Facade(facade)
 {
     qDebug() << "GUIHandlerCourseMaterial::GUIHandlerCourseMaterial";
@@ -19,17 +19,17 @@ GUIHandlerCourseMaterial::GUIHandlerCourseMaterial(QSharedPointer<Facade> facade
     this->setPalette(palette);
 }
 
-GUIHandlerCourseMaterial::~GUIHandlerCourseMaterial()
+CourseMaterial::~CourseMaterial()
 {
     qDebug() << "GUIHandlerCourseMaterial::~GUIHandlerCourseMaterial";
 }
 
-void GUIHandlerCourseMaterial::on_next_clicked()
+void CourseMaterial::on_next_clicked()
 {
     qDebug() << "GUIHandlerCourseMaterial::on_next_clicked";
 }
 
-void GUIHandlerCourseMaterial::on_backToCourseMenu_clicked()
+void CourseMaterial::on_backToCourseMenu_clicked()
 {
     qDebug() << "GUIHandlerCourseMaterial::on_backToCourseMenu_clicked";
 

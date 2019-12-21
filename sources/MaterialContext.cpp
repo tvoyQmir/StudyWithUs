@@ -1,6 +1,6 @@
 #include <QDebug>
 
-#include "MaterialContext.h"
+#include "headers/MaterialContext.h"
 
 MaterialContext::MaterialContext(QSharedPointer<DBManager> DBManager)
     : m_DBManager(DBManager)

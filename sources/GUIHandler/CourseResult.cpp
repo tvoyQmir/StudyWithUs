@@ -1,11 +1,11 @@
 #include <QDebug>
 
-#include "GUIHandlerCourseResult.h"
+#include "headers/GUIHandler/CourseResult.h"
 #include "ui_CourseResult.h"
 
-GUIHandlerCourseResult::GUIHandlerCourseResult(QSharedPointer<Facade> facade, QWidget *parent)
+CourseResult::CourseResult(QSharedPointer<Facade> facade, QWidget *parent)
     : QDialog(parent)
-    , m_ui(new Ui::GUIHandlerCourseResult)
+    , m_ui(new Ui::CourseResult)
     , m_Facade(facade)
 {
     qDebug() << "GUIHandlerCourseResult::GUIHandlerCourseResult";
@@ -18,12 +18,12 @@ GUIHandlerCourseResult::GUIHandlerCourseResult(QSharedPointer<Facade> facade, QW
     this->setPalette(palette);
 }
 
-GUIHandlerCourseResult::~GUIHandlerCourseResult()
+CourseResult::~CourseResult()
 {
     qDebug() << "GUIHandlerCourseResult::~GUIHandlerCourseResult";
 }
 
-void GUIHandlerCourseResult::on_backToCourseMenu_clicked()
+void CourseResult::on_backToCourseMenu_clicked()
 {
     qDebug() << "GUIHandlerCourseResult::on_backToCourseMenu_clicked";
 

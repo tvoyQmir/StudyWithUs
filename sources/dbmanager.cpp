@@ -1,6 +1,6 @@
 #include <QtSql>
 
-#include "DBManager.h"
+#include "headers/DBManager.h"
 
 DBManager::DBManager()
 {

@@ -2,20 +2,20 @@
 #include <QDialog>
 #include <QSharedPointer>
 
-#include "SignUp.h"
-#include "Facade.h"
+#include "FSMSignUp.h"
+#include "headers/Facade.h"
 
 namespace Ui {
 class SignUp;
 }
 
-class GUIHandlerSignUp : public QDialog
+class SignUp : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit GUIHandlerSignUp(QSharedPointer<Facade> facade, QWidget *parent = nullptr);
-    ~GUIHandlerSignUp();
+    explicit SignUp(QSharedPointer<Facade> facade, QWidget *parent = nullptr);
+    ~SignUp();
 
 signals:
     void GUIHandlerSignUpSignal();
@@ -28,7 +28,7 @@ private:
     void init();
     bool isValidData(const QString& login, const QString& password1, const QString& password2);
 
-    SignUp m_FSMSignUp;
+    FSMSignUp m_FSMSignUp;
 
     QSharedPointer<Ui::SignUp> m_ui;
     QSharedPointer<Facade> m_Facade;

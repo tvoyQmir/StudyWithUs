@@ -1,6 +1,6 @@
 #include <QDebug>
 
-#include "CourseControler.h"
+#include "headers/CourseControler.h"
 
 CourseControler::CourseControler(QSharedPointer<DBManager> DBManager)
     : m_DBManager(DBManager)
