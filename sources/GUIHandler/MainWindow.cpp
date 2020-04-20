@@ -31,39 +31,112 @@ MainWindow::~MainWindow()
     qDebug() << "GUIHandlerMainWindow::~GUIHandlerMainWindow";
 }
 
-void MainWindow::on_Sign_up_clicked()
+void MainWindow::on_Sign_up_btn_clicked()
 {
-    qDebug() << "GUIHandlerMainWindow::on_Sign_up_clicked";
+    qDebug() << "GUIHandlerMainWindow::on_Sign_up_btn_clicked()";
 
     this->close();
     m_GUIHandlerSignUpWindow->show();
 }
 
-void MainWindow::on_Sign_in_clicked()
+void MainWindow::on_Sign_in_btn_clicked()
 {
-    qDebug() << "GUIHandlerMainWindow::on_Sign_in_clicked";
+    qDebug() << "GUIHandlerMainWindow::on_Sign_in_btn_clicked()";
 
-    const QString login = m_ui->login->text();
-    const QString password = m_ui->pass->text();
+    checkData(m_ui->login_lineEdit->text(), m_ui->pass_lineEdit->text());
+}
 
-    if (login.isEmpty() || password.isEmpty())
+void MainWindow::keyPressEvent(QKeyEvent * event)
+{
+    const int key = event->key();
+    qDebug() << "GUIHandlerMainWindow::keyPressEvent(" <<  key << ")";
+
+    switch (key)
     {
-        QMessageBox::warning(this, "Sign in", "Please, enter valid data");
-        return;
+    case Qt::Key_Return:
+    {
+        qDebug() << "Key_Return";
+        if (m_ui->login_lineEdit->hasFocus())
+        {
+            // TODO add check
+            m_ui->pass_lineEdit->setFocus();
+        }
+        else if (m_ui->pass_lineEdit->hasFocus())
+        {
+            m_ui->Sign_in_btn->animateClick();
+        }
+        else if (m_ui->Sign_up_btn->hasFocus())
+        {
+            m_ui->Sign_up_btn->animateClick();
+        }
+        else if (m_ui->Sign_in_btn->hasFocus())
+        {
+            m_ui->Sign_in_btn->animateClick();
+        }
+        else
+        {
+            qDebug() << "No one has focus: pressing of the Sign_in_btn";
+            m_ui->Sign_up_btn->animateClick();
+        }
+
+        break;
+    }
+    case Qt::Key_Tab: //already implemented by QT
+    {
+        qDebug() << "Key_Tab";
+        break;
+    }
+    default:
+        qDebug() << "Unexpected key" << key;
+        break;
     }
 
-    const bool result = m_Facade->checkData(login, password);
+}
 
-    if (result)
+bool MainWindow::checkData(const QString& log, const QString& pass)
+{
+    qDebug() << "MainWindow::checkData";
+    if (log.isEmpty() || pass.isEmpty())
+    {
+        qDebug() << "login or password is empty";
+
+        QMessageBox msgBox;
+        msgBox.setText("Please, enter valid data");
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.button(QMessageBox::Ok)->animateClick(3000);
+        msgBox.exec();
+
+        return false;
+    }
+
+    if (m_Facade->checkData(log, pass))
     {
         qDebug() << "successfully logged";
-        QMessageBox::information(this, "Sign in", "You have successfully logged into your account"); //TODO add timeot on all messageBox
 
-        this->close(); // TODO do without closing window
+        QMessageBox msgBox;
+        msgBox.setText("You have successfully logged into your account");
+        msgBox.setIcon(QMessageBox::Information);
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.button(QMessageBox::Ok)->animateClick(3000);
+        msgBox.exec();
+
+        this->close();
         m_GUIHandleMenuWindow->show();
+
+        return true;
     }
     else
     {
-        QMessageBox::warning(this, "Sign in", "You are not registered. Click on 'Sign Up' button, if you want to register");
+        qDebug() << "unsuccessfully logged";
+
+        QMessageBox msgBox;
+        msgBox.setText("You are not registered. Click on 'Sign Up' button, if you want to register");
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.button(QMessageBox::Ok)->animateClick(3000);
+        msgBox.exec();
+
+        return false;
     }
 }

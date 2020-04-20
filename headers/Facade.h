@@ -1,9 +1,13 @@
 #pragma once
 #include <QObject>
 #include <QSharedPointer>
+
 #include "MaterialContext.h"
 #include "CourseControler.h"
-#include "DBManager.h"
+#include "CustomTypes.h"
+
+class DBManager;
+class FileOperations;
 
 class Facade
 {
@@ -13,15 +17,19 @@ public:
     void init();
 
     // Accounts
-    void setDataIntoAccounts(const QString& login, const QString& password);
+    void setDataIntoAccounts(const QString& login, const QString& password, const QString studentName);
     type::Account getLastElemFromAccounts() const;
     QVector<type::Account> getAllDataFromAccounts() const;
     bool checkData(const QString& login, const QString& password);
     bool isExistInAccountsTable(const QString& login);
-    QString getActiveAccount(); // TODO
+    const QString getActiveAccount(); // TODO
+
+    //FileOperations
+    QStringList getText(int subject);
 
 private:
     QSharedPointer<DBManager> m_DBManager;
+    QSharedPointer<FileOperations> m_FileOperations;
     MaterialContext m_MaterialContext;
     CourseControler m_CourseControler;
 };

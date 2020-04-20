@@ -7,9 +7,12 @@
 
 int main(int argc, char *argv[])
 {
-    qDebug() << "main";
+    qDebug() << "Starting application..";
 
     QApplication a(argc, argv);
+
+    QByteArray ba("login");
+    qDebug() << ba.toBase64();
 
     QSharedPointer<Facade> facade(new Facade);
     facade->init();

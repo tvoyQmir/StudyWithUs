@@ -13,14 +13,20 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>271</width>
-     <height>201</height>
+     <x>10</x>
+     <y>40</y>
+     <width>211</width>
+     <height>241</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: transparent;</string>
    </property>
    <property name="title">
     <string>Registration</string>
@@ -31,7 +37,7 @@
       <x>10</x>
       <y>20</y>
       <width>193</width>
-      <height>115</height>
+      <height>210</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -40,7 +46,21 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout">
+          <layout class="QHBoxLayout" name="horizontalLayout_1">
+           <item>
+            <widget class="QLabel" name="Name_label">
+             <property name="text">
+              <string>Name</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="name"/>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
             <widget class="QLabel" name="Login_label">
              <property name="text">
@@ -54,7 +74,7 @@
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
            <item>
             <widget class="QLabel" name="password_1_label">
              <property name="text">
@@ -63,12 +83,16 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="pass_1"/>
+            <widget class="QLineEdit" name="pass_1">
+             <property name="echoMode">
+              <enum>QLineEdit::Password</enum>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
             <widget class="QLabel" name="password_2_label">
              <property name="text">
@@ -77,7 +101,17 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="pass_2"/>
+            <widget class="QLineEdit" name="pass_2">
+             <property name="whatsThis">
+              <string/>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="echoMode">
+              <enum>QLineEdit::Password</enum>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
@@ -86,7 +120,7 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
         <widget class="QPushButton" name="back">
          <property name="text">

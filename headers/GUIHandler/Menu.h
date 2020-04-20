@@ -23,7 +23,6 @@ signals:
 
 private slots:
     void on_startCourse_clicked();
-
     void on_viewCourseResult_clicked();
 
 private:

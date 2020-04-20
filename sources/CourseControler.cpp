@@ -1,9 +1,12 @@
 #include <QDebug>
 
 #include "headers/CourseControler.h"
+#include "headers/DBManager.h"
+#include "headers/fileoperations.h"
 
-CourseControler::CourseControler(QSharedPointer<DBManager> DBManager)
+CourseControler::CourseControler(QSharedPointer<DBManager> DBManager, QSharedPointer<FileOperations> FileOperations)
     : m_DBManager(DBManager)
+    , m_FileOperations(FileOperations)
 {
     qDebug() << "CourseControler::CourseControler";
 }
