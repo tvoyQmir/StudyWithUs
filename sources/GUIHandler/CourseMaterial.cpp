@@ -18,7 +18,7 @@ CourseMaterial::CourseMaterial(const type::eSubject subject, const bool isPrevio
     , m_A(0, -40)
     , m_B(25, 40)
     , m_C(-25, 40)
-    , m_polygon()
+    , m_polygon({m_A, m_B, m_C})
     , m_QTextToSpeech(this)
     , m_isCreated(false)
 {
@@ -36,6 +36,7 @@ CourseMaterial::CourseMaterial(const type::eSubject subject, const bool isPrevio
     {
         foreach (const auto& str, m_Facade->getText(m_activeSubject))
         {
+            m_ui->sub_1_text->append(str);
             m_ui->sub_2_text->append(str);
         }
         // TODO off/on panel and view items
@@ -51,6 +52,7 @@ CourseMaterial::CourseMaterial(const type::eSubject subject, const bool isPrevio
     {
         foreach (const auto& str, m_Facade->getText(m_activeSubject))
         {
+            m_ui->sub_1_text->append(str);
             m_ui->sub_2_text->append(str);
         }
         // TODO off/on panel and view items
@@ -62,14 +64,16 @@ CourseMaterial::CourseMaterial(const type::eSubject subject, const bool isPrevio
         m_text2->setPos(m_B);
         m_text3->setPos(m_C);
 
-        m_polygonItem = m_scene->addPolygon(QPolygon({m_A, m_B, m_C}), QPen(Qt::black, 2));
+        m_polygonItem = m_scene->addPolygon(m_polygon, QPen(Qt::black, 2));
         m_polygonItem->setOpacity(m_opacity);
 
         m_elipseItem = m_scene->addEllipse(QRect(QPoint(10, 10), QPoint(100, 100)), QPen(Qt::black, 6));
         m_elipseItem->setOpacity(m_opacity);
+        m_elipseItem->setFlag(QGraphicsItem::ItemIsMovable);
 
         m_rectItem = m_scene->addRect(-100, -100, 50, 50, QPen(Qt::black, 6));
         m_rectItem->setOpacity(m_opacity);
+        m_rectItem->setFlag(QGraphicsItem::ItemIsMovable);
 
         break;
     }
@@ -77,6 +81,7 @@ CourseMaterial::CourseMaterial(const type::eSubject subject, const bool isPrevio
     {
         foreach (const auto& str, m_Facade->getText(m_activeSubject))
         {
+            m_ui->sub_1_text->append(str);
             m_ui->sub_2_text->append(str);
         }
         // TODO off/on panel and view items

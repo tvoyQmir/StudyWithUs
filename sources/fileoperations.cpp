@@ -18,22 +18,22 @@ QStringList FileOperations::getText(type::eSubject subject)
 {
 
     qDebug() << "FileOperations::getText(" << static_cast<int>(subject) << ")";
-/*
+
     switch (subject)
     {
     case type::eSubject::THE_SIMPLEST_GEOMETRY_OBJECTS:
     {
-        //return readFile(type::g_firstSubjectKeyStarts, type::g_firstSubjectKeyEnds);
+        return readFile(type::g_firstSubjectKeyStarts, type::g_firstSubjectKeyEnds);
         break;
     }
     case type::eSubject::SHAPES_AND_THEIR_ELEMENTS:
     {
-        //return readFile(type::g_secondtSubjectKeyStarts, type::g_secondSubjectKeyEnds);
+        return readFile(type::g_secondtSubjectKeyStarts, type::g_secondSubjectKeyEnds);
         break;
     }
     case type::eSubject::BASIC_THEOREMS_OF_INITIAL_GEOMENTRY:
     {
-        //return readFile(type::g_thirdSubjectKeyStarts, type::g_thirdSubjectKeyEnds);
+        return readFile(type::g_thirdSubjectKeyStarts, type::g_thirdSubjectKeyEnds);
         break;
     }
     default:
@@ -41,10 +41,6 @@ QStringList FileOperations::getText(type::eSubject subject)
         return QStringList();
         break;
     }
-    */
-    QStringList list;
-    list.append("test");
-    return list;
 }
 
 QStringList FileOperations::readFile(const QString& strKeyStarts, const QString& strKeyEnds)
