@@ -11,9 +11,6 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-    QByteArray ba("login");
-    qDebug() << ba.toBase64();
-
     QSharedPointer<Facade> facade(new Facade);
     facade->init();
 

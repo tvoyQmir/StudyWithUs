@@ -4,58 +4,88 @@
 #include "headers/Facade.h"
 #include "ui_CourseMaterial.h"
 
-CourseMaterial::CourseMaterial(QSharedPointer<Facade> facade, QWidget *parent)
+CourseMaterial::CourseMaterial(const type::eSubject subject, const bool isPreviousCourseMaterial, QSharedPointer<Facade> facade, QWidget *parent)
     : QDialog(parent)
+    , m_opacity(0)
+    , m_timerId(0)
     , m_TimerIsActive(false)
+    , m_isPreviousCourseMaterial(isPreviousCourseMaterial)
+    , m_activeSubject(subject)
     , m_ui(new Ui::CourseMaterial)
     , m_Facade(facade)
-    , mp_text1(nullptr)
-    , mp_text2(nullptr)
-    , mp_text3(nullptr)
+    , m_scene(new QGraphicsScene(this))
+    , m_customScene(new PaintScene(this))
     , m_A(0, -40)
     , m_B(25, 40)
     , m_C(-25, 40)
+    , m_polygon()
+    , m_QTextToSpeech(this)
+    , m_isCreated(false)
 {
     qDebug() << "GUIHandlerCourseMaterial::GUIHandlerCourseMaterial";
+/*
 
+*/
     m_ui->setupUi(this);
-    mp_scene = new QGraphicsScene(this);
-    mp_customScene = new PaintScene(this);
-    m_ui->graphicsView->setScene(mp_scene);
-    m_ui->graphicsView_2->setScene(mp_customScene);
+    m_ui->sub_1_view->setScene(m_scene.get());
+    m_ui->task_1_view->setScene(m_customScene.get());
 
-    foreach (const auto& str, m_Facade->getText(1))
+    switch (m_activeSubject)
     {
-        m_ui->textBrowser->append(str);
+    case type::eSubject::THE_SIMPLEST_GEOMETRY_OBJECTS:
+    {
+        foreach (const auto& str, m_Facade->getText(m_activeSubject))
+        {
+            m_ui->sub_2_text->append(str);
+        }
+        // TODO off/on panel and view items
+
+        QLine line(m_A, m_B);
+        m_lineItem = m_scene->addLine(line, QPen(Qt::black, 6));
+        m_lineItem->setFlag(QGraphicsItem::ItemIsMovable);
+        m_lineItem->setOpacity(m_opacity);
+
+        break;
     }
+    case type::eSubject::SHAPES_AND_THEIR_ELEMENTS:
+    {
+        foreach (const auto& str, m_Facade->getText(m_activeSubject))
+        {
+            m_ui->sub_2_text->append(str);
+        }
+        // TODO off/on panel and view items
 
-    //connect(mp_courseWindow, &CourseWindow::CourseWindowSignal, this, &CourseMaterial::show);
-    //connect(m_GUIHandlerCourseResultWindow.get(), &CourseResult::GUIHandlerCourseResultSignal, this, &Menu::show);
+        m_text1 = m_scene->addText("A(0, -40)");
+        m_text2 = m_scene->addText("B(25, 40)");
+        m_text3 = m_scene->addText("C(-25, 40)");
+        m_text1->setPos(m_A);
+        m_text2->setPos(m_B);
+        m_text3->setPos(m_C);
 
-    qDebug() << "creating shapes: begin";
-    m_polygon << m_A << m_B << m_C;
+        m_polygonItem = m_scene->addPolygon(QPolygon({m_A, m_B, m_C}), QPen(Qt::black, 2));
+        m_polygonItem->setOpacity(m_opacity);
 
-    mp_text1 = mp_scene->addText("A(0, -40)");
-    mp_text2 = mp_scene->addText("B(25, 40)");
-    mp_text3 = mp_scene->addText("C(-25, 40)");
-    mp_text1->setPos(m_A);
-    mp_text2->setPos(m_B);
-    mp_text3->setPos(m_C);
+        m_elipseItem = m_scene->addEllipse(QRect(QPoint(10, 10), QPoint(100, 100)), QPen(Qt::black, 6));
+        m_elipseItem->setOpacity(m_opacity);
 
-    mp_polygonItem = mp_scene->addPolygon(m_polygon, QPen(Qt::black, 2));
-    //mp_polygonItem->setFlag(QGraphicsItem::ItemIsMovable);
+        m_rectItem = m_scene->addRect(-100, -100, 50, 50, QPen(Qt::black, 6));
+        m_rectItem->setOpacity(m_opacity);
 
-    QLine line(m_A, m_B);
-    mp_lineItem = mp_scene->addLine(line, QPen(Qt::black, 6));
-    mp_lineItem->setFlag(QGraphicsItem::ItemIsMovable);
-
-    QRect rect(QPoint(10, 10), QPoint(100, 100));
-    mp_elipseItem = mp_scene->addEllipse(rect, QPen(Qt::black, 6));
-    mp_elipseItem->setFlag(QGraphicsItem::ItemIsMovable);
-
-    mp_rectItem = mp_scene->addRect(-100, -100, 50, 50, QPen(Qt::black, 6));
-    mp_rectItem->setFlag(QGraphicsItem::ItemIsMovable);
-    qDebug() << "creating shapes: end";
+        break;
+    }
+    case type::eSubject::BASIC_THEOREMS_OF_INITIAL_GEOMENTRY:
+    {
+        foreach (const auto& str, m_Facade->getText(m_activeSubject))
+        {
+            m_ui->sub_2_text->append(str);
+        }
+        // TODO off/on panel and view items
+        break;
+    }
+    default:
+        qDebug() << "Unknown subject: " << static_cast<int>(m_activeSubject);
+        break;
+    }
 
     QPixmap bkgnd(":/bkgnd/img/background/mainBackground.jpg");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
@@ -63,14 +93,7 @@ CourseMaterial::CourseMaterial(QSharedPointer<Facade> facade, QWidget *parent)
     palette.setBrush(QPalette::Background, bkgnd);
     this->setPalette(palette);
 
-    qDebug() << "appearance effect: begin";
-    m_opacity = 0;
-    mp_lineItem->setOpacity(m_opacity);
-    mp_polygonItem->setOpacity(m_opacity);
-    mp_elipseItem->setOpacity(m_opacity);
-    mp_rectItem->setOpacity(m_opacity);
-
-    qDebug() << "appearance effect: end";
+    init();
 }
 
 CourseMaterial::~CourseMaterial()
@@ -78,22 +101,91 @@ CourseMaterial::~CourseMaterial()
     qDebug() << "GUIHandlerCourseMaterial::~GUIHandlerCourseMaterial";
 }
 
+void CourseMaterial::init()
+{
+    qDebug() << "GUIHandlerCourseMaterial::init";
+    // TODO
+}
+
 void CourseMaterial::on_next_clicked()
 {
     qDebug() << "GUIHandlerCourseMaterial::on_next_clicked";
+    this->close();
+
+    if (!m_isCreated)
+    {
+        qDebug() << "+++++++++++++++++Creating of CourseMaterial+++++++++++++++++++++++";
+        m_CourseMaterial_next = QSharedPointer<CourseMaterial>::create(type::eSubject::SHAPES_AND_THEIR_ELEMENTS, true, m_Facade, this);
+    }
+
+    connect(m_CourseMaterial_next.get(), &CourseMaterial::GUIHandlerCourseMaterialNextSignal, this, &CourseMaterial::show);
+    m_CourseMaterial_next->show();
 }
 
-void CourseMaterial::on_backToCourseMenu_clicked()
+void CourseMaterial::on_back_clicked()
 {
-    qDebug() << "GUIHandlerCourseMaterial::on_backToCourseMenu_clicked";
+    qDebug() << "GUIHandlerCourseMaterial::on_back_clicked";
+
+    this->close();
+
+    if (m_isPreviousCourseMaterial)
+    {
+        qDebug() << "GUIHandlerCourseMaterialNextSignal";
+        emit GUIHandlerCourseMaterialNextSignal();
+    }
+    else
+    {
+        qDebug() << "GUIHandlerCourseMaterialSignal";
+        emit GUIHandlerCourseMaterialSignal();
+    }
+}
+
+void CourseMaterial::on_sound_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_sound_clicked";
+    m_QTextToSpeech.stop();
+    QString toSpeech;
+
+    foreach (const auto& str, m_Facade->getText(m_activeSubject))
+    {
+        qDebug() << "ToSpeech " << str;
+        toSpeech.append(str);
+    }
+
+    m_QTextToSpeech.say(toSpeech);
+}
+
+void CourseMaterial::on_next_1_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_next_1_clicked";
+}
+
+void CourseMaterial::on_back_1_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_back_1_clicked";
 
     this->close();
     emit GUIHandlerCourseMaterialSignal();
 }
 
+void CourseMaterial::on_sound_1_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_sound_1_clicked";
+    m_QTextToSpeech.stop();
+    QString toSpeech;
+
+    foreach (const auto& str, m_Facade->getText(m_activeSubject))
+    {
+        qDebug() << "ToSpeech " << str;
+        toSpeech.append(str);
+    }
+
+    m_QTextToSpeech.say(toSpeech);
+}
+
 void CourseMaterial::paintEvent(QPaintEvent *e)
 {
-    qDebug() << "CourseMaterial::paintEvent";
+    //qDebug() << "CourseMaterial::paintEvent";
 
     Q_UNUSED(e);
 
@@ -111,7 +203,7 @@ void CourseMaterial::paintEvent(QPaintEvent *e)
 
 void CourseMaterial::doPainting()
 {
-    qDebug() << "CourseMaterial::doPainting";
+    //qDebug() << "CourseMaterial::doPainting";
 
     if (m_opacity >= 1)
     {
@@ -123,15 +215,36 @@ void CourseMaterial::doPainting()
 
     m_opacity += 0.01;
 
-    mp_lineItem->setOpacity(m_opacity);
-    mp_polygonItem->setOpacity(m_opacity);
-    mp_elipseItem->setOpacity(m_opacity);
-    mp_rectItem->setOpacity(m_opacity);
+    switch (m_activeSubject)
+    {
+    case type::eSubject::THE_SIMPLEST_GEOMETRY_OBJECTS:
+    {
+        m_lineItem->setOpacity(m_opacity);
+
+        break;
+    }
+    case type::eSubject::SHAPES_AND_THEIR_ELEMENTS:
+    {
+        m_polygonItem->setOpacity(m_opacity);
+        m_elipseItem->setOpacity(m_opacity);
+        m_rectItem->setOpacity(m_opacity);
+
+        break;
+    }
+    case type::eSubject::BASIC_THEOREMS_OF_INITIAL_GEOMENTRY:
+    {
+        // TODO off/on panel and view items
+        break;
+    }
+    default:
+        qDebug() << "Unknown subject: " << static_cast<int>(m_activeSubject);
+        break;
+    }
 }
 
 void CourseMaterial::timerEvent(QTimerEvent *e)
 {
-    qDebug() << "CourseMaterial::timerEvent";
+    //qDebug() << "CourseMaterial::timerEvent";
     Q_UNUSED(e);
 
     repaint();

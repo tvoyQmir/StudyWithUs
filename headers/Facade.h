@@ -25,7 +25,7 @@ public:
     const QString getActiveAccount(); // TODO
 
     //FileOperations
-    QStringList getText(int subject);
+    QStringList getText(type::eSubject subject);
 
 private:
     QSharedPointer<DBManager> m_DBManager;

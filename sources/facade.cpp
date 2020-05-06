@@ -64,8 +64,8 @@ const QString Facade::getActiveAccount()
      return m_DBManager->getActiveAccount();
 }
 
-QStringList Facade::getText(int subject)
+QStringList Facade::getText(type::eSubject subject)
 {
-     qDebug() << "Facade::requestText(" << subject << ")";
+     qDebug() << "Facade::requestText(" << static_cast<int>(subject) << ")";
      return m_FileOperations->getText(subject);
 }

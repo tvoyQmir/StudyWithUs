@@ -2,12 +2,13 @@
 
 #include "headers/GUIHandler/Menu.h"
 #include "ui_CourseMenu.h"
+#include "headers/CustomTypes.h"
 
 Menu::Menu(QSharedPointer<Facade> facade, QWidget *parent)
     : QDialog(parent)
     , m_ui(new Ui::CourseMenu)
     , m_GUIHandlerCourseResultWindow(new CourseResult(facade))
-    , m_GUIHandlerCourseMaterialWindow(new CourseMaterial(facade))
+    , m_GUIHandlerCourseMaterialWindow(new CourseMaterial(type::eSubject::THE_SIMPLEST_GEOMETRY_OBJECTS, false, facade, this))
     , m_Facade(facade)
 {
      qDebug() << "GUIHandlerMenu::GUIHandlerMenu";

@@ -8,8 +8,10 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsSceneMouseEvent>
 #include <QPointF>
+#include <QtTextToSpeech>
 
 #include "headers/paintscene.h"
+#include "headers/CustomTypes.h"
 
 class Facade;
 
@@ -22,39 +24,65 @@ class CourseMaterial : public QDialog
     Q_OBJECT
 
 public:
-    explicit CourseMaterial(QSharedPointer<Facade> facade, QWidget *parent = nullptr);
+     CourseMaterial(const type::eSubject subject, const bool isPreviousCourseMaterial, QSharedPointer<Facade> facade, QWidget *parent = nullptr);
     ~CourseMaterial();
+     void init();
 
 signals:
     void GUIHandlerCourseMaterialSignal();
+    void GUIHandlerCourseMaterialNextSignal();
 
 private slots:
     void on_next_clicked();
-    void on_backToCourseMenu_clicked();
+    void on_back_clicked();
+    void on_sound_clicked();
 
-private:    
+    void on_next_1_clicked();
+    void on_back_1_clicked();
+    void on_sound_1_clicked();
+
+private:
+    /**
+      *
+      * private methods
+      *
+      */
     void paintEvent(QPaintEvent *event);
     void timerEvent(QTimerEvent *event);
     void doPainting();
+
+    /**
+      *
+      * private variables
+      *
+      */
 
     qreal m_opacity;
     int m_timerId;
     bool m_TimerIsActive;
 
-    QSharedPointer<Ui::CourseMaterial> m_ui;
-    QSharedPointer<Facade> m_Facade;
-    QGraphicsScene* mp_scene;
-    QGraphicsEllipseItem* mp_elipseItem;
-    QGraphicsRectItem* mp_rectItem;
-    QGraphicsPolygonItem* mp_polygonItem;
-    QPolygon m_polygon;
-    QPointF m_previousPoint;
-    PaintScene* mp_customScene;
-    QGraphicsLineItem* mp_lineItem;
-    QGraphicsTextItem* mp_text1;
-    QGraphicsTextItem* mp_text2;
-    QGraphicsTextItem* mp_text3;
+    bool m_isPreviousCourseMaterial;
+    type::eSubject m_activeSubject;
+
+    QSharedPointer<Ui::CourseMaterial>   m_ui;
+    QSharedPointer<Facade>               m_Facade;
+    QSharedPointer<CourseMaterial>       m_CourseMaterial_next;
+    QSharedPointer<QGraphicsScene>       m_scene;
+    QSharedPointer<PaintScene>           m_customScene;
+
+    QGraphicsEllipseItem* m_elipseItem;
+    QGraphicsPolygonItem* m_polygonItem;
+    QGraphicsRectItem* m_rectItem;
+    QGraphicsLineItem* m_lineItem;
+
+    QGraphicsTextItem* m_text1;
+    QGraphicsTextItem* m_text2;
+    QGraphicsTextItem* m_text3;
+
     QPoint m_A;
     QPoint m_B;
     QPoint m_C;
+    QPolygon m_polygon;
+    QTextToSpeech m_QTextToSpeech;
+    bool m_isCreated;
 };
