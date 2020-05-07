@@ -5,6 +5,18 @@
         <file>img/next.png</file>
         <file>img/previous.png</file>
         <file>img/sound.png</file>
+        <file>img/results.png</file>
+        <file>img/welcome.png</file>
+        <file>img/hello.png</file>
+        <file>img/sign_in.png</file>
+        <file>img/sign_out.png</file>
+        <file>img/help.png</file>
+        <file>img/sign_up.png</file>
+        <file>img/start_education.png</file>
+        <file>img/sign_up1.png</file>
+        <file>img/start_education_.png</file>
+        <file>img/start_education_1.png</file>
+        <file>img/start_education3.png</file>
     </qresource>
     <qresource prefix="/bkgnd">
         <file>img/background/mainBackground.jpg</file>
