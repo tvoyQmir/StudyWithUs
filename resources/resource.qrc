@@ -13,10 +13,6 @@
         <file>img/help.png</file>
         <file>img/sign_up.png</file>
         <file>img/start_education.png</file>
-        <file>img/sign_up1.png</file>
-        <file>img/start_education_.png</file>
-        <file>img/start_education_1.png</file>
-        <file>img/start_education3.png</file>
     </qresource>
     <qresource prefix="/bkgnd">
         <file>img/background/mainBackground.jpg</file>
