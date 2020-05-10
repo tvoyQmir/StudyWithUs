@@ -46,6 +46,12 @@ QVector<type::Account> Facade::getAllDataFromAccounts() const
      return m_DBManager->getAllDataFromAccounts();
 }
 
+QVector<type::Result> Facade::getAllResults() const
+{
+    qDebug() << "Facade::getAllResults()";
+    return m_DBManager->getAllResults();
+}
+
 bool Facade::checkData(const QString& login, const QString& password)
 {
      qDebug() << "Facade::checkData(" << login << password <<")";

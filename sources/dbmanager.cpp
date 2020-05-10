@@ -157,6 +157,40 @@ QVector<type::Account> DBManager::getAllDataFromAccounts()
     return accounts;
 }
 
+QVector<type::Result> DBManager::getAllResults()
+{
+    qDebug() << "DBManager::getAllResults()";
+    QVector<type::Result> results;
+    type::Result result;
+
+    QSqlQuery a_query;
+    if (!a_query.exec("SELECT name, rating FROM Accounts"))
+    {
+        qDebug() << "Can't select data from table";
+        return QVector<type::Result>();
+    }
+
+    QSqlRecord rec = a_query.record();
+
+    while (a_query.next())
+    {
+
+        const QString studName = a_query.value(rec.indexOf("name")).toString();
+        const int raiting = a_query.value(rec.indexOf("rating")).toInt();
+
+        qDebug() << "| name is " << studName
+                 << "| raiting is " << raiting
+                 << "|";
+
+
+        result.studentName = studName;
+        result.raiting = raiting;
+        results.push_back(result);
+    }
+
+    return results;
+}
+
 bool DBManager::checkData(const QString& login, const QString& password)
 {
     qDebug() << "DBManager::checkData()";

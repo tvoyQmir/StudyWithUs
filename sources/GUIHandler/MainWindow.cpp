@@ -34,7 +34,6 @@ MainWindow::~MainWindow()
 void MainWindow::on_Sign_up_btn_clicked()
 {
     qDebug() << "GUIHandlerMainWindow::on_Sign_up_btn_clicked()";
-
     this->close();
     m_GUIHandlerSignUpWindow->show();
 }

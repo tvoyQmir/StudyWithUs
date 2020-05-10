@@ -67,13 +67,28 @@ private:
     QSharedPointer<Ui::CourseMaterial>   m_ui;
     QSharedPointer<Facade>               m_Facade;
     QSharedPointer<CourseMaterial>       m_CourseMaterial_next;
-    QSharedPointer<QGraphicsScene>       m_scene;
-    QSharedPointer<PaintScene>           m_customScene;
+    QSharedPointer<PaintScene>           m_customScene_1;
+    QSharedPointer<PaintScene>           m_customScene_2;
+    QSharedPointer<PaintScene>           m_customScene_3;
+    QSharedPointer<QGraphicsScene>       m_scene_1;
+    QSharedPointer<QGraphicsScene>       m_scene_2;
+    QSharedPointer<QGraphicsScene>       m_scene_3;
+    QSharedPointer<QGraphicsScene>       m_scene_4;
+    QSharedPointer<QGraphicsScene>       m_scene_5;
 
     QGraphicsEllipseItem* m_elipseItem;
     QGraphicsPolygonItem* m_polygonItem;
     QGraphicsRectItem* m_rectItem;
+
+    QGraphicsEllipseItem* m_elipse1Item;
+    QGraphicsEllipseItem* m_elipse2Item;
+    QGraphicsLineItem* m_line1Item;
     QGraphicsLineItem* m_lineItem;
+    QGraphicsPathItem* m_line_PathItem;
+    QGraphicsPathItem* m_curvePathItem;
+    QGraphicsPathItem* m_linePathItem;
+    QGraphicsPathItem* m_lineSegPathItem;
+    QGraphicsPathItem* m_angledPathItem;
 
     QGraphicsTextItem* m_text1;
     QGraphicsTextItem* m_text2;

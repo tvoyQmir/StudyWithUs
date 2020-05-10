@@ -99,7 +99,7 @@
           </property>
           <property name="icon">
            <iconset resource="../resources/resource.qrc">
-            <normaloff>:/src/img/sign_up1.png</normaloff>:/src/img/sign_up1.png</iconset>
+            <normaloff>:/src/img/sign_up.png</normaloff>:/src/img/sign_up.png</iconset>
           </property>
           <property name="iconSize">
            <size>

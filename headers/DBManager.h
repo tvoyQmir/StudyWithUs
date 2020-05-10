@@ -17,6 +17,7 @@ public:
     void updateRatingOfActiveAccount(const int rating);
     type::Account getLastElemFromAccounts();
     QVector<type::Account> getAllDataFromAccounts();
+    QVector<type::Result> getAllResults();
     bool checkData(const QString& login, const QString& password);
     bool isExistInAccountsTable(const QString& login);
     const QString getActiveAccount();

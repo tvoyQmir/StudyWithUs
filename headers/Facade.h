@@ -20,6 +20,7 @@ public:
     void setDataIntoAccounts(const QString& login, const QString& password, const QString studentName);
     type::Account getLastElemFromAccounts() const;
     QVector<type::Account> getAllDataFromAccounts() const;
+    QVector<type::Result> getAllResults() const;
     bool checkData(const QString& login, const QString& password);
     bool isExistInAccountsTable(const QString& login);
     const QString getActiveAccount(); // TODO

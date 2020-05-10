@@ -29,11 +29,12 @@ void SignUp::on_signUpButton_clicked()
     const QString login = m_ui->login->text();
     const QString password1 = m_ui->pass_1->text();
     const QString password2 = m_ui->pass_2->text();
+    const QString name = m_ui->name->text();
 
     if (isValidData(login, password1, password2))
     {
         qDebug() << "Set registration data into DB";
-        m_Facade->setDataIntoAccounts(QString(login.toStdString().c_str()), QString(password2.toStdString().c_str()), "default");
+        m_Facade->setDataIntoAccounts(QString(login.toStdString().c_str()), QString(password2.toStdString().c_str()), name);
         m_FSMSignUp.submitEvent("finishRegistration");
     }
     else

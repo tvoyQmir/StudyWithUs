@@ -13,5 +13,7 @@ public:
 
 private:
     QStringList readFile(const QString& strKeyStarts, const QString& strKeyEnds);
+    QStringList clearFromServiceInformation(const QStringList& stringList);
+
     QFile m_file;
 };

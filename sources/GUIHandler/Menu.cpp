@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <QDesktopServices>
 
 #include "headers/GUIHandler/Menu.h"
 #include "ui_CourseMenu.h"
@@ -43,5 +44,28 @@ void Menu::on_viewCourseResult_clicked()
     qDebug() << "GUIHandlerMenu::on_viewCourseResult_clicked";
 
     this->close();
+    m_GUIHandlerCourseResultWindow->updateData();
     m_GUIHandlerCourseResultWindow->show();
+}
+
+void Menu::on_help_clicked()
+{
+    qDebug() << "GUIHandlerMenu::on_help_clicked";
+    // TODO
+}
+
+void Menu::on_telegram_clicked()
+{
+    qDebug() << "GUIHandlerMenu::on_telegram_clicked";
+
+    QString link = "https://t.me/achechui";
+    QDesktopServices::openUrl(QUrl(link));
+}
+
+void Menu::on_email_clicked()
+{
+    qDebug() << "GUIHandlerMenu::on_email_clicked";
+
+    QString link = "mailto:artyk16@gmail.com";
+    QDesktopServices::openUrl(QUrl(link));
 }

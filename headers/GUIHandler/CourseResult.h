@@ -16,6 +16,8 @@ public:
     explicit CourseResult(QSharedPointer<Facade> facade, QWidget *parent = nullptr);
     ~CourseResult();
 
+    void updateData();
+
 signals:
     void GUIHandlerCourseResultSignal();
 

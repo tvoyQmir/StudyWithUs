@@ -21,9 +21,44 @@ QStringList FileOperations::getText(type::eSubject subject)
 
     switch (subject)
     {
+    case type::eSubject::ALL_TEXT:
+    {
+        return readFile(type::g_KeyStarts, type::g_KeyEnds);
+        break;
+    }
     case type::eSubject::THE_SIMPLEST_GEOMETRY_OBJECTS:
     {
         return readFile(type::g_firstSubjectKeyStarts, type::g_firstSubjectKeyEnds);
+        break;
+    }
+    case type::eSubject::THE_SIMPLEST_GEOMETRY_OBJECTS_TITLE:
+    {
+        return readFile(type::g_firstSubjectTitleKeyStarts, type::g_firstSubjectTitleKeyEnds);
+        break;
+    }
+    case type::eSubject::THE_SIMPLEST_GEOMETRY_OBJECTS_DOT:
+    {
+        return readFile(type::g_firstSubjectDotKeyStarts, type::g_firstSubjectDotKeyEnds);
+        break;
+    }
+    case type::eSubject::THE_SIMPLEST_GEOMETRY_OBJECTS_LINE:
+    {
+        return readFile(type::g_firstSubjectLineKeyStarts, type::g_firstSubjectLineKeyEnds);
+        break;
+    }
+    case type::eSubject::THE_SIMPLEST_GEOMETRY_OBJECTS_BEAM:
+    {
+        return readFile(type::g_firstSubjectBeamKeyStarts, type::g_firstSubjectBeamKeyEnds);
+        break;
+    }
+    case type::eSubject::THE_SIMPLEST_GEOMETRY_OBJECTS_LINE_SEG:
+    {
+        return readFile(type::g_firstSubjectLineSegKeyStarts, type::g_firstSubjectLineSegKeyEnds);
+        break;
+    }
+    case type::eSubject::THE_SIMPLEST_GEOMETRY_OBJECTS_ANGLED_LINE:
+    {
+        return readFile(type::g_firstSubjectAngledLineKeyStarts, type::g_firstSubjectAngledLineKeyEnds);
         break;
     }
     case type::eSubject::SHAPES_AND_THEIR_ELEMENTS:
@@ -36,6 +71,8 @@ QStringList FileOperations::getText(type::eSubject subject)
         return readFile(type::g_thirdSubjectKeyStarts, type::g_thirdSubjectKeyEnds);
         break;
     }
+    case type::eSubject::MIN:
+    case type::eSubject::MAX:
     default:
         qDebug() << "Unexpected type";
         return QStringList();
@@ -63,18 +100,18 @@ QStringList FileOperations::readFile(const QString& strKeyStarts, const QString&
 
             if (line == strKeyStarts)
             {
-                qDebug() << "*** found key :" << line << ", needToWriteToStr true";
+                qDebug() << "*** found key :" << line << ", needToWriteToStrList true";
                 needToWriteToStrList = true;
                 continue;
             }
             else if (line == strKeyEnds)
             {
-                qDebug() << "*** found key :" << line << ", needToWriteToStr false";
+                qDebug() << "*** found key :" << line << ", needToWriteToStrList false";
                 needToWriteToStrList = false;
-                continue;
+                break;
             }
 
-            qDebug() << line;
+            //qDebug() << line;
 
             if (needToWriteToStrList)
             {
@@ -90,11 +127,41 @@ QStringList FileOperations::readFile(const QString& strKeyStarts, const QString&
     }
 
     m_file.close();
-
+/*
     foreach(const auto& line, strList)
     {
          qDebug() << line;
     }
+*/
+    return clearFromServiceInformation(strList);
+}
 
-    return strList;
+QStringList FileOperations::clearFromServiceInformation(const QStringList& stringList)
+{
+    qDebug() << "FileOperations::clearFromServiceInformation()";
+
+    bool needToWriteToStrList;
+    QStringList stringListToUI;
+
+    foreach(const auto& line, stringList)
+    {
+        needToWriteToStrList = true;
+
+        if (line.indexOf(type::g_KeyStarts) != -1)
+        {
+            needToWriteToStrList = false;
+        }
+        else if (line.indexOf(type::g_KeyEnds) != -1)
+        {
+            needToWriteToStrList = false;
+        }
+
+        if (needToWriteToStrList)
+        {
+            stringListToUI.push_back(line);
+            //qDebug() << line;
+        }
+    }
+
+    return stringListToUI;
 }

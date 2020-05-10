@@ -13,6 +13,9 @@
         <file>img/help.png</file>
         <file>img/sign_up.png</file>
         <file>img/start_education.png</file>
+        <file>img/telegram.png</file>
+        <file>img/email.png</file>
+        <file>img/mark.png</file>
     </qresource>
     <qresource prefix="/bkgnd">
         <file>img/background/mainBackground.jpg</file>

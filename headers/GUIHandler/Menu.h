@@ -24,6 +24,9 @@ signals:
 private slots:
     void on_startCourse_clicked();
     void on_viewCourseResult_clicked();
+    void on_help_clicked();
+    void on_telegram_clicked();
+    void on_email_clicked();
 
 private:
     QSharedPointer<Ui::CourseMenu> m_ui;
