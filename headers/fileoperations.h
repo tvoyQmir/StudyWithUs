@@ -10,6 +10,7 @@ public:
     FileOperations();
     void init();
     QStringList getText(type::eSubject subject);
+    bool saveText(const QStringList& strList);
 
 private:
     QStringList readFile(const QString& strKeyStarts, const QString& strKeyEnds);

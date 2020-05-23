@@ -69,9 +69,20 @@ const QString Facade::getActiveAccount()
      qDebug() << "Facade::getActiveAccount()";
      return m_DBManager->getActiveAccount();
 }
+bool Facade::checkActiveAdminAccont()
+{
+    qDebug() << "Facade::checkActiveAdminAccont()";
+    return m_DBManager->checkActiveAdminAccont();
+}
 
 QStringList Facade::getText(type::eSubject subject)
 {
      qDebug() << "Facade::requestText(" << static_cast<int>(subject) << ")";
      return m_FileOperations->getText(subject);
+}
+
+bool Facade::saveText(const QStringList& strList)
+{
+    qDebug() << "Facade::saveText(strList)";
+    return m_FileOperations->saveText(strList);
 }

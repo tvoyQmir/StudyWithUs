@@ -234,5 +234,20 @@ bool DBManager::isExistInAccountsTable(const QString& login)
 const QString DBManager::getActiveAccount()
 {
     qDebug() << "DBManager::getActiveAccount";
-    return QString(m_ActiveAccount.login.toStdString().c_str());
+    return QString(m_ActiveAccount.login.toStdString().c_str()); // TODO get all account
+}
+
+bool DBManager::checkActiveAdminAccont()
+{
+    qDebug() << "DBManager::checkActiveAdminAccont";
+
+    const type::AdminAccount admin;
+    bool isAdmin = false;
+
+    if (admin.login == m_ActiveAccount.login)
+    {
+        isAdmin = true;
+    }
+
+    return isAdmin;
 }

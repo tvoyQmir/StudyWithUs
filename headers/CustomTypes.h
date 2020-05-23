@@ -19,6 +19,12 @@ struct Result
    int raiting;
 };
 
+struct AdminAccount
+{
+   const int id = -1; // TODO do static
+   const QString login = "admin";
+   const QString password = "admin";
+};
 
 enum class eSubject : int
 {
@@ -51,12 +57,5 @@ const QString g_firstSubjectLineSegKeyEnds = "firstSubjectLineSegKeyEnds";
 const QString g_firstSubjectAngledLineKeyStarts = "firstSubjectAngledLineKeyStarts";
 const QString g_firstSubjectAngledLineKeyEnds = "firstSubjectAngledLineKeyEnds";
 const QString g_firstSubjectKeyEnds = "firstSubjectKeyEnds";
-
-
-const QString g_secondtSubjectKeyStarts = "secondtSubjectKeyStarts";
-const QString g_secondSubjectKeyEnds = "secondSubjectKeyEnds";
-
-const QString g_thirdSubjectKeyStarts = "thirdSubjectKeyStarts";
-const QString g_thirdSubjectKeyEnds = "thirdSubjectKeyEnds";
 const QString g_KeyEnds = "KeyEnds";
 } //namespace type

@@ -9,6 +9,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QPointF>
 #include <QtTextToSpeech>
+#include <QProgressDialog>
 
 #include "headers/paintscene.h"
 #include "headers/CustomTypes.h"
@@ -41,15 +42,41 @@ private slots:
     void on_back_1_clicked();
     void on_sound_1_clicked();
 
+    void on_save_clicked();
+    void on_save_2_clicked();
+    void on_save_3_clicked();
+    void on_save_5_clicked();
+    void on_save_6_clicked();
+    void on_save_7_clicked();
+    void on_save_8_clicked();
+    void on_save_9_clicked();
+    void on_save_10_clicked();
+    void on_save_11_clicked();
+
+    void on_edit_clicked();
+    void on_edit_2_clicked();
+    void on_edit_3_clicked();
+    void on_edit_5_clicked();
+    void on_edit_6_clicked();
+    void on_edit_7_clicked();
+    void on_edit_8_clicked();
+    void on_edit_9_clicked();
+    void on_edit_10_clicked();
+    void on_edit_11_clicked();
+
 private:
     /**
       *
       * private methods
       *
       */
-    void paintEvent(QPaintEvent *event);
-    void timerEvent(QTimerEvent *event);
+
+    void showEvent(QShowEvent* e) override;
+    void paintEvent(QPaintEvent *event) override;
+    void timerEvent(QTimerEvent *event) override;
     void doPainting();
+    void preparationForAdminAccount();
+    void saveText();
 
     /**
       *
@@ -75,6 +102,7 @@ private:
     QSharedPointer<QGraphicsScene>       m_scene_3;
     QSharedPointer<QGraphicsScene>       m_scene_4;
     QSharedPointer<QGraphicsScene>       m_scene_5;
+    QProgressDialog*      m_progDialog;
 
     QGraphicsEllipseItem* m_elipseItem;
     QGraphicsPolygonItem* m_polygonItem;
@@ -100,4 +128,5 @@ private:
     QPolygon m_polygon;
     QTextToSpeech m_QTextToSpeech;
     bool m_isCreated;
+    bool m_isAdminActive;
 };

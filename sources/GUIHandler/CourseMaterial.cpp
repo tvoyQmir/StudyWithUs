@@ -27,6 +27,7 @@ CourseMaterial::CourseMaterial(const type::eSubject subject, const bool isPrevio
     , m_polygon({m_A, m_B, m_C})
     , m_QTextToSpeech(this)
     , m_isCreated(false)
+    , m_isAdminActive(false)
 {
     qDebug() << "GUIHandlerCourseMaterial::GUIHandlerCourseMaterial";
 
@@ -41,7 +42,7 @@ CourseMaterial::CourseMaterial(const type::eSubject subject, const bool isPrevio
     m_ui->task_1_view->setScene(m_customScene_1.get());
     m_ui->task_2_view->setScene(m_customScene_2.get());
     m_ui->task_3_view->setScene(m_customScene_3.get());
-
+    //move to showEvent
     switch (m_activeSubject)
     {
     case type::eSubject::THE_SIMPLEST_GEOMETRY_OBJECTS:
@@ -275,7 +276,7 @@ void CourseMaterial::init()
 void CourseMaterial::on_next_clicked()
 {
     qDebug() << "GUIHandlerCourseMaterial::on_next_clicked";
-    this->close();
+    /*this->close();
 
     if (!m_isCreated)
     {
@@ -285,6 +286,7 @@ void CourseMaterial::on_next_clicked()
 
     connect(m_CourseMaterial_next.get(), &CourseMaterial::GUIHandlerCourseMaterialNextSignal, this, &CourseMaterial::show);
     m_CourseMaterial_next->show();
+    */
 }
 
 void CourseMaterial::on_back_clicked()
@@ -357,6 +359,160 @@ void CourseMaterial::on_sound_1_clicked()
     */
 }
 
+void CourseMaterial::on_save_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_save_clicked";
+
+    // TODO redo to the QShared
+    m_progDialog = new QProgressDialog("Saving...", "", 0, 100, this);
+    m_progDialog->setWindowModality(Qt::WindowModal);
+    m_progDialog->setCancelButton(0);
+    m_progDialog->setAttribute(Qt::WA_DeleteOnClose);
+    m_progDialog->setValue(0);
+    m_progDialog->show();
+
+    m_ui->sub_title_text->setReadOnly(true); // TODO
+    saveText();
+    m_progDialog->close();
+}
+
+void CourseMaterial::on_save_2_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_save_2_clicked";
+}
+
+void CourseMaterial::on_save_3_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_save_3_clicked";
+}
+
+void CourseMaterial::on_save_5_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_save_5_clicked";
+}
+
+void CourseMaterial::on_save_6_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_save_6_clicked";
+}
+
+void CourseMaterial::on_save_7_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_save_7_clicked";
+}
+
+void CourseMaterial::on_save_8_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_save_8_clicked";
+}
+
+void CourseMaterial::on_save_9_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_save_9_clicked";
+}
+
+void CourseMaterial::on_save_10_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_save_10_clicked";
+}
+
+void CourseMaterial::on_save_11_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_save_11_clicked";
+}
+
+void CourseMaterial::on_edit_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_edit_clicked";
+    m_ui->sub_title_text->setReadOnly(false);
+    // TODO message box
+}
+
+void CourseMaterial::on_edit_2_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_edit_2_clicked";
+}
+
+void CourseMaterial::on_edit_3_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_edit_3_clicked";
+}
+
+void CourseMaterial::on_edit_5_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_edit_5_clicked";
+}
+
+void CourseMaterial::on_edit_6_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_edit_6_clicked";
+}
+
+void CourseMaterial::on_edit_7_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_edit_7_clicked";
+}
+
+void CourseMaterial::on_edit_8_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_edit_8_clicked";
+}
+
+void CourseMaterial::on_edit_9_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_edit_9_clicked";
+}
+
+void CourseMaterial::on_edit_10_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_edit_10_clicked";
+}
+
+void CourseMaterial::on_edit_11_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_edit_11_clicked";
+}
+
+void CourseMaterial::showEvent(QShowEvent* e)
+{
+    qDebug() << "CourseMaterial::showEvent";
+    m_isAdminActive = m_Facade->checkActiveAdminAccont();
+
+    if (m_isAdminActive)
+    {
+        qDebug() << "The admin account is active";
+        preparationForAdminAccount();
+    }
+    else
+    {
+        qDebug() << "The student account is active. Don't do special preparation";\
+
+        m_ui->edit->setVisible(false);
+        m_ui->edit_2->setVisible(false);
+        m_ui->edit_3->setVisible(false);
+        m_ui->edit_5->setVisible(false);
+        m_ui->edit_6->setVisible(false);
+        m_ui->edit_7->setVisible(false);
+        m_ui->edit_8->setVisible(false);
+        m_ui->edit_9->setVisible(false);
+        m_ui->edit_10->setVisible(false);
+        m_ui->edit_11->setVisible(false);
+
+        m_ui->save->setVisible(false);
+        m_ui->save_2->setVisible(false);
+        m_ui->save_3->setVisible(false);
+        m_ui->save_5->setVisible(false);
+        m_ui->save_6->setVisible(false);
+        m_ui->save_7->setVisible(false);
+        m_ui->save_8->setVisible(false);
+        m_ui->save_9->setVisible(false);
+        m_ui->save_10->setVisible(false);
+        m_ui->save_11->setVisible(false);
+    }
+
+    Q_UNUSED(e);
+}
+
 void CourseMaterial::paintEvent(QPaintEvent *e)
 {
     //qDebug() << "CourseMaterial::paintEvent";
@@ -373,6 +529,14 @@ void CourseMaterial::paintEvent(QPaintEvent *e)
     {
         doPainting();
     }
+}
+
+void CourseMaterial::timerEvent(QTimerEvent *e)
+{
+    //qDebug() << "CourseMaterial::timerEvent";
+    Q_UNUSED(e);
+
+    repaint();
 }
 
 void CourseMaterial::doPainting()
@@ -428,13 +592,98 @@ void CourseMaterial::doPainting()
         qDebug() << "Unknown subject: " << static_cast<int>(m_activeSubject);
         break;
     }
-
 }
 
-void CourseMaterial::timerEvent(QTimerEvent *e)
+void CourseMaterial::preparationForAdminAccount()
 {
-    //qDebug() << "CourseMaterial::timerEvent";
-    Q_UNUSED(e);
+    qDebug() << "CourseMaterial::preparationForAdminAccount()";
 
-    repaint();
+    m_ui->edit->setVisible(true);
+    m_ui->edit_2->setVisible(true);
+    m_ui->edit_3->setVisible(true);
+    m_ui->edit_5->setVisible(true);
+    m_ui->edit_6->setVisible(true);
+    m_ui->edit_7->setVisible(true);
+    m_ui->edit_8->setVisible(true);
+    m_ui->edit_9->setVisible(true);
+    m_ui->edit_10->setVisible(true);
+    m_ui->edit_11->setVisible(true);
+
+    m_ui->save->setVisible(true);
+    m_ui->save_2->setVisible(true);
+    m_ui->save_3->setVisible(true);
+    m_ui->save_5->setVisible(true);
+    m_ui->save_6->setVisible(true);
+    m_ui->save_7->setVisible(true);
+    m_ui->save_8->setVisible(true);
+    m_ui->save_9->setVisible(true);
+    m_ui->save_10->setVisible(true);
+    m_ui->save_11->setVisible(true);
+    qDebug() << "CourseMaterial::preparationForAdminAccount() end";
+}
+
+void CourseMaterial::saveText()
+{
+    qDebug() << "CourseMaterial::saveText()";
+    m_progDialog->setValue(0);
+    QStringList strList;
+    strList.push_back(type::g_KeyStarts);
+    m_progDialog->setValue(4);
+    strList.push_back(type::g_firstSubjectKeyStarts);
+    m_progDialog->setValue(8);
+    strList.push_back(type::g_firstSubjectTitleKeyStarts);
+    m_progDialog->setValue(12);
+    strList.push_back(m_ui->sub_title_text->toPlainText());
+    m_progDialog->setValue(16);
+    strList.push_back(type::g_firstSubjectTitleKeyEnds);
+    m_progDialog->setValue(20);
+
+    strList.push_back(type::g_firstSubjectDotKeyStarts);
+    m_progDialog->setValue(24);
+    strList.push_back(m_ui->sub_dot_text->toPlainText());
+    m_progDialog->setValue(28);
+    strList.push_back(type::g_firstSubjectDotKeyEnds);
+    m_progDialog->setValue(32);
+
+    strList.push_back(type::g_firstSubjectLineKeyStarts);
+    m_progDialog->setValue(36);
+    strList.push_back(m_ui->sub_line_text->toPlainText());
+    m_progDialog->setValue(40);
+    strList.push_back(type::g_firstSubjectLineKeyEnds);
+    m_progDialog->setValue(44);
+
+    strList.push_back(type::g_firstSubjectBeamKeyStarts);
+    m_progDialog->setValue(48);
+    strList.push_back(m_ui->sub_beam_text->toPlainText());
+    m_progDialog->setValue(52);
+    strList.push_back(type::g_firstSubjectBeamKeyEnds);
+    m_progDialog->setValue(56);
+
+    strList.push_back(type::g_firstSubjectLineSegKeyStarts);
+    m_progDialog->setValue(60);
+    strList.push_back(m_ui->sub_line_seg_text->toPlainText());
+    m_progDialog->setValue(64);
+    strList.push_back(type::g_firstSubjectLineSegKeyEnds);
+    m_progDialog->setValue(68);
+
+    strList.push_back(type::g_firstSubjectAngledLineKeyStarts);
+    m_progDialog->setValue(72);
+    strList.push_back(m_ui->sub_angled_line_text->toPlainText());
+    m_progDialog->setValue(76);
+    strList.push_back(type::g_firstSubjectAngledLineKeyEnds);
+    m_progDialog->setValue(82);
+
+    strList.push_back(type::g_firstSubjectKeyEnds);
+    m_progDialog->setValue(86);
+    strList.push_back(type::g_KeyEnds);
+    m_progDialog->setValue(90);
+
+    if (m_Facade->saveText(strList))
+    {
+        m_progDialog->setValue(100);
+    }
+    else
+    {
+        // TODO close and show an error popup
+    }
 }

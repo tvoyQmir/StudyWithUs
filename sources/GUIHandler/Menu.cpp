@@ -36,7 +36,12 @@ void Menu::on_startCourse_clicked()
     qDebug() << "GUIHandlerMenu::on_startCourse_clicked";
 
     this->close();
-    m_GUIHandlerCourseMaterialWindow->show();
+
+    if (m_GUIHandlerCourseMaterialWindow)
+    {
+        qDebug() << "Show CourseMaterialWindow";
+        m_GUIHandlerCourseMaterialWindow->show();
+    }
 }
 
 void Menu::on_viewCourseResult_clicked()

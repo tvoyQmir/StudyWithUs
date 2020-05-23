@@ -21,6 +21,7 @@ public:
     bool checkData(const QString& login, const QString& password);
     bool isExistInAccountsTable(const QString& login);
     const QString getActiveAccount();
+    bool checkActiveAdminAccont();
 
 private:
     type::Account m_ActiveAccount;

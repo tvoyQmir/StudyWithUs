@@ -24,9 +24,11 @@ public:
     bool checkData(const QString& login, const QString& password);
     bool isExistInAccountsTable(const QString& login);
     const QString getActiveAccount(); // TODO
+    bool checkActiveAdminAccont();
 
     //FileOperations
     QStringList getText(type::eSubject subject);
+    bool saveText(const QStringList& strList);
 
 private:
     QSharedPointer<DBManager> m_DBManager;

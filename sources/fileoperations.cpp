@@ -16,7 +16,6 @@ void FileOperations::init()
 
 QStringList FileOperations::getText(type::eSubject subject)
 {
-
     qDebug() << "FileOperations::getText(" << static_cast<int>(subject) << ")";
 
     switch (subject)
@@ -63,12 +62,16 @@ QStringList FileOperations::getText(type::eSubject subject)
     }
     case type::eSubject::SHAPES_AND_THEIR_ELEMENTS:
     {
-        return readFile(type::g_secondtSubjectKeyStarts, type::g_secondSubjectKeyEnds);
+        //return readFile(type::g_secondtSubjectKeyStarts, type::g_secondSubjectKeyEnds);
+        //TODO
+        return QStringList();
         break;
     }
     case type::eSubject::BASIC_THEOREMS_OF_INITIAL_GEOMENTRY:
     {
-        return readFile(type::g_thirdSubjectKeyStarts, type::g_thirdSubjectKeyEnds);
+        //return readFile(type::g_thirdSubjectKeyStarts, type::g_thirdSubjectKeyEnds);
+        // TODO
+        return QStringList();
         break;
     }
     case type::eSubject::MIN:
@@ -78,6 +81,30 @@ QStringList FileOperations::getText(type::eSubject subject)
         return QStringList();
         break;
     }
+}
+
+bool FileOperations::saveText(const QStringList& strList)
+{
+    qDebug() << "FileOperations::saveText(strList)";
+
+    if (!m_file.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+       qDebug() << "Can't open file";
+       return false;
+    }
+
+   QTextStream stream(&m_file);
+
+    foreach(const auto& line, strList)
+    {
+        //qDebug() << line << endl;
+        stream << line << endl; // TODO endl
+        //stream.flush();
+    }
+
+    m_file.close();
+
+    return true;
 }
 
 QStringList FileOperations::readFile(const QString& strKeyStarts, const QString& strKeyEnds)

@@ -16,6 +16,8 @@
         <file>img/telegram.png</file>
         <file>img/email.png</file>
         <file>img/mark.png</file>
+        <file>img/edit.png</file>
+        <file>img/save.png</file>
     </qresource>
     <qresource prefix="/bkgnd">
         <file>img/background/mainBackground.jpg</file>
