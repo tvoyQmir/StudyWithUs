@@ -34,6 +34,13 @@ signals:
     void GUIHandlerCourseMaterialNextSignal();
 
 private slots:
+    void on_dot_clicked();
+    void on_line_clicked();
+    void on_line_segment_clicked();
+    void on_curve_line_clicked();
+    void on_triangle_clicked();
+    void on_rectangle_clicked();
+
     void on_next_clicked();
     void on_back_clicked();
     void on_sound_clicked();
@@ -48,8 +55,8 @@ private slots:
     void on_save_5_clicked();
     void on_save_6_clicked();
     void on_save_7_clicked();
-    void on_save_8_clicked();
-    void on_save_9_clicked();
+    //void on_save_8_clicked();
+    //void on_save_9_clicked();
     void on_save_10_clicked();
     void on_save_11_clicked();
 
@@ -59,9 +66,9 @@ private slots:
     void on_edit_5_clicked();
     void on_edit_6_clicked();
     void on_edit_7_clicked();
-    void on_edit_8_clicked();
-    void on_edit_9_clicked();
-    void on_edit_10_clicked();
+    //void on_edit_8_clicked();
+   // void on_edit_9_clicked();
+    //void on_edit_10_clicked();
     void on_edit_11_clicked();
 
 private:
@@ -77,6 +84,9 @@ private:
     void doPainting();
     void preparationForAdminAccount();
     void saveText();
+    void highlightText();
+    void prepareAllText(); // TODO add -s
+    void prepareALlShapes();
 
     /**
       *
@@ -102,25 +112,39 @@ private:
     QSharedPointer<QGraphicsScene>       m_scene_3;
     QSharedPointer<QGraphicsScene>       m_scene_4;
     QSharedPointer<QGraphicsScene>       m_scene_5;
-    QProgressDialog*      m_progDialog;
+    QProgressDialog*      m_progDialog; // TODO
 
     QGraphicsEllipseItem* m_elipseItem;
     QGraphicsPolygonItem* m_polygonItem;
     QGraphicsRectItem* m_rectItem;
 
-    QGraphicsEllipseItem* m_elipse1Item;
     QGraphicsEllipseItem* m_elipse2Item;
-    QGraphicsLineItem* m_line1Item;
+
     QGraphicsLineItem* m_lineItem;
+
     QGraphicsPathItem* m_line_PathItem;
     QGraphicsPathItem* m_curvePathItem;
     QGraphicsPathItem* m_linePathItem;
     QGraphicsPathItem* m_lineSegPathItem;
     QGraphicsPathItem* m_angledPathItem;
 
-    QGraphicsTextItem* m_text1;
     QGraphicsTextItem* m_text2;
-    QGraphicsTextItem* m_text3;
+
+    // dot
+    QGraphicsEllipseItem* m_DotItem;
+    QGraphicsTextItem* m_textDot;
+    QRect m_dot;
+
+    // Line Seg
+    QGraphicsLineItem* m_lineSegItem;
+    QGraphicsTextItem* m_text_line_seg_begin;
+    QGraphicsTextItem* m_text_line_seg_end;
+    QLine m_line_seg;
+
+    // Line
+    QGraphicsLineItem* m_line1Item;
+    QGraphicsTextItem* m_text_line;
+    QLine m_line;
 
     QPoint m_A;
     QPoint m_B;

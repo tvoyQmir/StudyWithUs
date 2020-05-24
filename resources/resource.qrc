@@ -18,6 +18,12 @@
         <file>img/mark.png</file>
         <file>img/edit.png</file>
         <file>img/save.png</file>
+        <file>img/dot.png</file>
+        <file>img/line.png</file>
+        <file>img/rectangle.png</file>
+        <file>img/triangle.png</file>
+        <file>img/curve_line.png</file>
+        <file>img/line_segment.png</file>
     </qresource>
     <qresource prefix="/bkgnd">
         <file>img/background/mainBackground.jpg</file>
