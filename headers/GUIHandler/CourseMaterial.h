@@ -41,6 +41,34 @@ private slots:
     void on_triangle_clicked();
     void on_rectangle_clicked();
 
+    void on_dot_2_clicked();
+    void on_line_2_clicked();
+    void on_line_segment_2_clicked();
+    void on_curve_line_2_clicked();
+    void on_triangle_2_clicked();
+    void on_rectangle_2_clicked();
+
+    void on_dot_3_clicked();
+    void on_line_3_clicked();
+    void on_line_segment_3_clicked();
+    void on_curve_line_3_clicked();
+    void on_triangle_3_clicked();
+    void on_rectangle_3_clicked();
+
+    void on_dot_4_clicked();
+    void on_line_4_clicked();
+    void on_line_segment_4_clicked();
+    void on_curve_line_4_clicked();
+    void on_triangle_4_clicked();
+    void on_rectangle_4_clicked();
+
+    void on_dot_5_clicked();
+    void on_line_5_clicked();
+    void on_line_segment_5_clicked();
+    void on_curve_line_5_clicked();
+    void on_triangle_5_clicked();
+    void on_rectangle_5_clicked();
+
     void on_next_clicked();
     void on_back_clicked();
     void on_sound_clicked();
@@ -49,27 +77,19 @@ private slots:
     void on_back_1_clicked();
     void on_sound_1_clicked();
 
-    void on_save_clicked();
-    void on_save_2_clicked();
-    void on_save_3_clicked();
-    void on_save_5_clicked();
-    void on_save_6_clicked();
-    void on_save_7_clicked();
-    //void on_save_8_clicked();
-    //void on_save_9_clicked();
-    void on_save_10_clicked();
-    void on_save_11_clicked();
+    void on_save_title_clicked();
+    void on_save_first_paragraph_clicked();
+    void on_save_second_paragraph_clicked();
+    void on_save_third_paragraph_clicked();
+    void on_save_fourth_paragraph_clicked();
+    void on_save_fifth_paragraph_clicked();
 
-    void on_edit_clicked();
-    void on_edit_2_clicked();
-    void on_edit_3_clicked();
-    void on_edit_5_clicked();
-    void on_edit_6_clicked();
-    void on_edit_7_clicked();
-    //void on_edit_8_clicked();
-   // void on_edit_9_clicked();
-    //void on_edit_10_clicked();
-    void on_edit_11_clicked();
+    void on_edit_title_clicked();
+    void on_edit_first_paragraph_clicked();
+    void on_edit_second_paragraph_clicked();
+    void on_edit_third_paragraph_clicked();
+    void on_edit_fourth_paragraph_clicked();
+    void on_edit_fifth_paragraph_clicked();
 
 private:
     /**
@@ -87,6 +107,14 @@ private:
     void highlightText();
     void prepareAllText(); // TODO add -s
     void prepareALlShapes();
+    void onSaveClicked();
+    void onEditClicked();
+    void onDotClicked(QSharedPointer<QGraphicsScene> scene);
+    void onLineClicked(QSharedPointer<QGraphicsScene> scene);
+    void onLineSegClicked(QSharedPointer<QGraphicsScene> scene);
+    void onCurveLineClicked(QSharedPointer<QGraphicsScene> scene);
+    void onTriangleClicked(QSharedPointer<QGraphicsScene> scene);
+    void onRectangleClicked(QSharedPointer<QGraphicsScene> scene);
 
     /**
       *
@@ -97,9 +125,11 @@ private:
     qreal m_opacity;
     int m_timerId;
     bool m_TimerIsActive;
-
     bool m_isPreviousCourseMaterial;
     type::eSubject m_activeSubject;
+    QTextToSpeech m_QTextToSpeech;
+    bool m_isCreated;
+    bool m_isAdminActive;
 
     QSharedPointer<Ui::CourseMaterial>   m_ui;
     QSharedPointer<Facade>               m_Facade;
@@ -112,28 +142,22 @@ private:
     QSharedPointer<QGraphicsScene>       m_scene_3;
     QSharedPointer<QGraphicsScene>       m_scene_4;
     QSharedPointer<QGraphicsScene>       m_scene_5;
-    QProgressDialog*      m_progDialog; // TODO
-
-    QGraphicsEllipseItem* m_elipseItem;
-    QGraphicsPolygonItem* m_polygonItem;
-    QGraphicsRectItem* m_rectItem;
-
-    QGraphicsEllipseItem* m_elipse2Item;
-
-    QGraphicsLineItem* m_lineItem;
-
-    QGraphicsPathItem* m_line_PathItem;
-    QGraphicsPathItem* m_curvePathItem;
-    QGraphicsPathItem* m_linePathItem;
-    QGraphicsPathItem* m_lineSegPathItem;
-    QGraphicsPathItem* m_angledPathItem;
-
-    QGraphicsTextItem* m_text2;
 
     // dot
     QGraphicsEllipseItem* m_DotItem;
     QGraphicsTextItem* m_textDot;
     QRect m_dot;
+
+    // Line
+    QGraphicsPathItem* m_line_PathItem;
+    QGraphicsLineItem* m_line1Item;
+    QGraphicsTextItem* m_text_line;
+    QLine m_line;
+
+    // Curve
+    QGraphicsPathItem* m_curvePathItem;
+    QGraphicsPathItem* m_linePathItem;
+    QGraphicsLineItem* m_lineItem;
 
     // Line Seg
     QGraphicsLineItem* m_lineSegItem;
@@ -141,16 +165,16 @@ private:
     QGraphicsTextItem* m_text_line_seg_end;
     QLine m_line_seg;
 
-    // Line
-    QGraphicsLineItem* m_line1Item;
-    QGraphicsTextItem* m_text_line;
-    QLine m_line;
+    //Angled
+    QGraphicsPathItem* m_angledPathItem;
 
-    QPoint m_A;
-    QPoint m_B;
-    QPoint m_C;
+    //triangle
+    QGraphicsPolygonItem* m_polygonItem;
     QPolygon m_polygon;
-    QTextToSpeech m_QTextToSpeech;
-    bool m_isCreated;
-    bool m_isAdminActive;
+
+    //cirle
+    QGraphicsEllipseItem* m_circleItem;
+
+    //rectangle
+    QGraphicsRectItem* m_rectItem;
 };

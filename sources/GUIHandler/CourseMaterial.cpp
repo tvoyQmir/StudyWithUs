@@ -1,5 +1,6 @@
 #include <QDebug>
 #include <QInputDialog>
+#include <QMessageBox>
 
 #include "headers/GUIHandler/CourseMaterial.h"
 #include "headers/Facade.h"
@@ -12,6 +13,9 @@ CourseMaterial::CourseMaterial(const type::eSubject subject, const bool isPrevio
     , m_TimerIsActive(false)
     , m_isPreviousCourseMaterial(isPreviousCourseMaterial)
     , m_activeSubject(subject)
+    , m_QTextToSpeech(this)
+    , m_isCreated(false)
+    , m_isAdminActive(false)
     , m_ui(new Ui::CourseMaterial)
     , m_Facade(facade)
     , m_customScene_1(new PaintScene(this))
@@ -23,15 +27,10 @@ CourseMaterial::CourseMaterial(const type::eSubject subject, const bool isPrevio
     , m_scene_4(new QGraphicsScene(this))
     , m_scene_5(new QGraphicsScene(this))
     , m_dot(0, -10, 10, 10)
-    , m_line_seg(100, 100, 500, 100)
     , m_line(0, 100, 200, 100)
-    , m_A(0, -40)
-    , m_B(25, 40)
-    , m_C(-25, 40)
-    , m_polygon({m_A, m_B, m_C})
-    , m_QTextToSpeech(this)
-    , m_isCreated(false)
-    , m_isAdminActive(false)
+    , m_line_seg(100, 100, 500, 100)
+    , m_polygon({QPoint(0, -40), QPoint(25, 40), QPoint(-25, 40)})
+
 {
     qDebug() << "GUIHandlerCourseMaterial::GUIHandlerCourseMaterial";
 
@@ -60,122 +59,191 @@ void CourseMaterial::init()
 void CourseMaterial::on_dot_clicked()
 {
     qDebug() << "CourseMaterial::on_dot_clicked";
-
-    const int x = QInputDialog::getInt(this, "Enter data", " x =");
-    const int y = QInputDialog::getInt(this, "Enter data", "y =");
-
-    QProgressDialog* pg = new QProgressDialog("Processing...", "", 0, 100, this);
-    pg->setWindowModality(Qt::WindowModal);
-    pg->setCancelButton(0);
-    pg->setAttribute(Qt::WA_DeleteOnClose);
-    pg->setValue(0);
-    pg->show();
-
-    //m_dot.setX(x);
-    //pg->setValue(2);
-    //m_dot.setY(y);
-
-    m_dot.moveTo(x, y);
-    pg->setValue(9);
-    m_scene_1->clear();
-    pg->setValue(18);
-    m_textDot = m_scene_1->addText("A");
-    pg->setValue(36);
-    m_textDot->setPos(x, y - 20);
-    pg->setValue(54);
-    m_textDot->setOpacity(m_opacity);
-    pg->setValue(72);
-    m_DotItem = m_scene_1->addEllipse(m_dot, QPen(Qt::NoPen), QBrush(Qt::black));
-    pg->setValue(90);
-    m_DotItem->setOpacity(m_opacity);
-    pg->setValue(100);
-    pg->close();
+    onDotClicked(m_scene_1);
 }
 
 void CourseMaterial::on_line_clicked()
 {
     qDebug() << "CourseMaterial::on_line_clicked";
-
-    const int x = QInputDialog::getInt(this, "Enter data", "First dot x =");
-    const int y = QInputDialog::getInt(this, "Enter data", "First dot y =");
-    const int x2 = QInputDialog::getInt(this, "Enter data", "Second dot x =");
-    const int y2 = QInputDialog::getInt(this, "Enter data", "Second dot y =");
-
-    QProgressDialog* pg = new QProgressDialog("Processing...", "", 0, 100, this);
-    pg->setWindowModality(Qt::WindowModal);
-    pg->setCancelButton(0);
-    pg->setAttribute(Qt::WA_DeleteOnClose);
-    pg->setValue(0);
-    pg->show();
-
-    m_line.setLine(x, y, x2, y2);
-    pg->setValue(15);
-    m_scene_1->clear();
-    pg->setValue(30);
-    m_line1Item = m_scene_1->addLine(m_line, QPen(Qt::black, 4));
-    pg->setValue(45);
-    m_line1Item->setOpacity(1);
-    pg->setValue(60);
-    m_text_line = m_scene_1->addText("a");
-    pg->setValue(75);
-    m_text_line->setPos(m_line.x1(), m_line.y1() - 30);
-    pg->setValue(90);
-    m_text_line->setOpacity(1);
-    pg->setValue(100);
-    pg->close();
+    onLineClicked(m_scene_1);
 }
 
 void CourseMaterial::on_line_segment_clicked()
 {
     qDebug() << "CourseMaterial::on_line_segment_clicked";
-
-    const int x = QInputDialog::getInt(this, "Enter data", "First dot x =");
-    const int y = QInputDialog::getInt(this, "Enter data", "First dot y =");
-    const int x2 = QInputDialog::getInt(this, "Enter data", "Second dot x =");
-    const int y2 = QInputDialog::getInt(this, "Enter data", "Second dot y =");
-
-    QProgressDialog* pg = new QProgressDialog("Processing...", "", 0, 100, this);
-    pg->setWindowModality(Qt::WindowModal);
-    pg->setCancelButton(0);
-    pg->setAttribute(Qt::WA_DeleteOnClose);
-    pg->setValue(0);
-    pg->show();
-
-    m_line.setLine(x, y, x2, y2);
-    pg->setValue(15);
-    m_scene_1->clear();
-    pg->setValue(30);
-    m_line1Item = m_scene_1->addLine(m_line, QPen(Qt::black, 4));
-    pg->setValue(45);
-    m_line1Item->setOpacity(1);
-    pg->setValue(60);
-    m_text_line = m_scene_1->addText("a");
-    pg->setValue(75);
-    m_text_line->setPos(m_line.x1(), m_line.y1() - 30);
-    pg->setValue(90);
-    m_text_line->setOpacity(1);
-    pg->setValue(100);
-    pg->close();
+    onLineSegClicked(m_scene_1);
 }
 
 void CourseMaterial::on_curve_line_clicked()
 {
-
+    qDebug() << "GUIHandlerCourseMaterial::on_curve_line_clicked";
+    onCurveLineClicked(m_scene_1);
 }
 
 void CourseMaterial::on_triangle_clicked()
 {
-
+    qDebug() << "GUIHandlerCourseMaterial::on_triangle_clicked";
+    onTriangleClicked(m_scene_1);
 }
 
 void CourseMaterial::on_rectangle_clicked()
 {
+    qDebug() << "GUIHandlerCourseMaterial::on_rectangle_clicked";
+    onRectangleClicked(m_scene_1);
+}
 
+void CourseMaterial::on_dot_2_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_dot_2_clicked";
+    onDotClicked(m_scene_2);
+}
+
+void CourseMaterial::on_line_2_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_line_2_clicked";
+    onLineClicked(m_scene_2);
+}
+
+void CourseMaterial::on_line_segment_2_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_line_segment_2_clicked";
+    onLineSegClicked(m_scene_2);
+}
+
+void CourseMaterial::on_curve_line_2_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_curve_line_2_clicked";
+    onCurveLineClicked(m_scene_2);
+}
+
+void CourseMaterial::on_triangle_2_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_triangle_2_clicked";
+    onTriangleClicked(m_scene_2);
+}
+
+void CourseMaterial::on_rectangle_2_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_rectangle_2_clicked";
+    onRectangleClicked(m_scene_2);
+}
+
+void CourseMaterial::on_dot_3_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_dot_3_clicked";
+    onDotClicked(m_scene_3);
+}
+
+void CourseMaterial::on_line_3_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_line_3_clicked";
+    onLineClicked(m_scene_3);
+}
+
+void CourseMaterial::on_line_segment_3_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_line_segment_3_clicked";
+    onLineSegClicked(m_scene_3);
+}
+
+void CourseMaterial::on_curve_line_3_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_curve_line_3_clicked";
+    onCurveLineClicked(m_scene_3);
+}
+
+void CourseMaterial::on_triangle_3_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_triangle_3_clicked";
+    onTriangleClicked(m_scene_3);
+}
+
+void CourseMaterial::on_rectangle_3_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_rectangle_3_clicked";
+    onRectangleClicked(m_scene_3);
+}
+
+void CourseMaterial::on_dot_4_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_dot_4_clicked";
+    onDotClicked(m_scene_4);
+}
+
+void CourseMaterial::on_line_4_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_line_4_clicked";
+    onLineClicked(m_scene_4);
+}
+
+void CourseMaterial::on_line_segment_4_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_line_segment_4_clicked";
+    onLineSegClicked(m_scene_4);
+}
+
+void CourseMaterial::on_curve_line_4_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_curve_line_4_clicked";
+    onCurveLineClicked(m_scene_4);
+}
+
+void CourseMaterial::on_triangle_4_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_triangle_4_clicked";
+    onTriangleClicked(m_scene_4);
+}
+
+void CourseMaterial::on_rectangle_4_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_rectangle_4_clicked";
+    onRectangleClicked(m_scene_4);
+}
+
+void CourseMaterial::on_dot_5_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_dot_5_clicked";
+    onDotClicked(m_scene_5);
+}
+
+void CourseMaterial::on_line_5_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_line_5_clicked";
+    onLineClicked(m_scene_5);
+}
+
+void CourseMaterial::on_line_segment_5_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_line_segment_5_clicked";
+    onLineSegClicked(m_scene_5);
+}
+
+void CourseMaterial::on_curve_line_5_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_curve_line_5_clicked";
+    onCurveLineClicked(m_scene_5);
+}
+
+void CourseMaterial::on_triangle_5_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_triangle_5_clicked";
+    onTriangleClicked(m_scene_5);
+}
+
+void CourseMaterial::on_rectangle_5_clicked()
+{
+    qDebug() << "GUIHandlerCourseMaterial::on_rectangle_5_clicked";
+    onRectangleClicked(m_scene_5);
 }
 
 void CourseMaterial::on_next_clicked()
 {
     qDebug() << "GUIHandlerCourseMaterial::on_next_clicked";
+
+    QMessageBox msgBox(QMessageBox::Warning,"Warning", "This functionality is underway.", QMessageBox::Ok, this);
+    msgBox.button(QMessageBox::Ok)->animateClick(3000);
+    msgBox.exec();
+
     /*this->close();
 
     if (!m_isCreated)
@@ -232,6 +300,11 @@ void CourseMaterial::on_sound_clicked()
 void CourseMaterial::on_next_1_clicked()
 {
     qDebug() << "GUIHandlerCourseMaterial::on_next_1_clicked";
+
+    QMessageBox msgBox(QMessageBox::Warning,"Warning", "This functionality is underway.", QMessageBox::Ok, this);
+    msgBox.button(QMessageBox::Ok)->animateClick(3000);
+    msgBox.exec();
+
 }
 
 void CourseMaterial::on_back_1_clicked()
@@ -244,108 +317,108 @@ void CourseMaterial::on_back_1_clicked()
 
 void CourseMaterial::on_sound_1_clicked()
 {
-    /* TODO
-    qDebug() << "GUIHandlerCourseMaterial::on_sound_1_clicked";
-    m_QTextToSpeech.stop();
-    QString toSpeech;
+    qDebug() << "GUIHandlerCourseMaterial::on_sound_1_clicked"; // TODO sound task
 
-    foreach (const auto& str, m_Facade->getText(m_activeSubject))
+    if (m_QTextToSpeech.state() == QTextToSpeech::State::Speaking)
     {
-        qDebug() << "ToSpeech " << str;
-        toSpeech.append(str);
+        m_QTextToSpeech.stop();
     }
+    else
+    {
+        QString toSpeech;
 
-    m_QTextToSpeech.say(toSpeech);
-    */
+        foreach (const auto& str, m_Facade->getText(m_activeSubject))
+        {
+            qDebug() << "ToSpeech " << str;
+            toSpeech.append(str);
+        }
+
+        m_QTextToSpeech.say(toSpeech);
+    }
 }
 
-void CourseMaterial::on_save_clicked()
+void CourseMaterial::on_save_title_clicked()
 {
-    qDebug() << "GUIHandlerCourseMaterial::on_save_clicked";
-
-    // TODO redo to the QShared
-    m_progDialog = new QProgressDialog("Saving...", "", 0, 100, this);
-    m_progDialog->setWindowModality(Qt::WindowModal);
-    m_progDialog->setCancelButton(0);
-    m_progDialog->setAttribute(Qt::WA_DeleteOnClose);
-    m_progDialog->setValue(0);
-    m_progDialog->show();
-
-    m_ui->sub_title_text->setReadOnly(true); // TODO
-    saveText();
-    m_progDialog->close();
+    qDebug() << "GUIHandlerCourseMaterial::on_save_title_clicked";
+    m_ui->sub_title_text->setReadOnly(true);
+    onSaveClicked();
 }
 
-void CourseMaterial::on_save_2_clicked()
+void CourseMaterial::on_save_first_paragraph_clicked()
 {
-    qDebug() << "GUIHandlerCourseMaterial::on_save_2_clicked";
+    qDebug() << "GUIHandlerCourseMaterial::on_save_first_paragraph_clicked";
+    m_ui->sub_dot_text->setReadOnly(true);
+    onSaveClicked();
 }
 
-void CourseMaterial::on_save_3_clicked()
+void CourseMaterial::on_save_second_paragraph_clicked()
 {
-    qDebug() << "GUIHandlerCourseMaterial::on_save_3_clicked";
+    qDebug() << "GUIHandlerCourseMaterial::on_save_second_paragraph_clicked";
+    m_ui->sub_line_text->setReadOnly(true);
+    onSaveClicked();
 }
 
-void CourseMaterial::on_save_5_clicked()
+void CourseMaterial::on_save_third_paragraph_clicked()
 {
-    qDebug() << "GUIHandlerCourseMaterial::on_save_5_clicked";
+    qDebug() << "GUIHandlerCourseMaterial::on_save_third_paragraph_clicked";
+    m_ui->sub_beam_text->setReadOnly(true);
+    onSaveClicked();
 }
 
-void CourseMaterial::on_save_6_clicked()
+void CourseMaterial::on_save_fourth_paragraph_clicked()
 {
-    qDebug() << "GUIHandlerCourseMaterial::on_save_6_clicked";
+    qDebug() << "GUIHandlerCourseMaterial::on_save_fourth_paragraph_clicked";
+    m_ui->sub_angled_line_text->setReadOnly(true);
+    onSaveClicked();
 }
 
-void CourseMaterial::on_save_7_clicked()
+void CourseMaterial::on_save_fifth_paragraph_clicked()
 {
-    qDebug() << "GUIHandlerCourseMaterial::on_save_7_clicked";
+    qDebug() << "GUIHandlerCourseMaterial::on_save_fifth_paragraph_clicked";
+    m_ui->sub_beam_text->setReadOnly(true);
+    onSaveClicked();
 }
 
-void CourseMaterial::on_save_10_clicked()
+void CourseMaterial::on_edit_title_clicked()
 {
-    qDebug() << "GUIHandlerCourseMaterial::on_save_10_clicked";
-}
-
-void CourseMaterial::on_save_11_clicked()
-{
-    qDebug() << "GUIHandlerCourseMaterial::on_save_11_clicked";
-}
-
-void CourseMaterial::on_edit_clicked()
-{
-    qDebug() << "GUIHandlerCourseMaterial::on_edit_clicked";
+    qDebug() << "GUIHandlerCourseMaterial::on_edit_title_clicked";
     m_ui->sub_title_text->setReadOnly(false);
-    // TODO message box
+    onEditClicked();
 }
 
-void CourseMaterial::on_edit_2_clicked()
+void CourseMaterial::on_edit_first_paragraph_clicked()
 {
-    qDebug() << "GUIHandlerCourseMaterial::on_edit_2_clicked";
+    qDebug() << "GUIHandlerCourseMaterial::on_edit_first_paragraph_clicked";
+    m_ui->sub_dot_text->setReadOnly(false);
+    onEditClicked();
 }
 
-void CourseMaterial::on_edit_3_clicked()
+void CourseMaterial::on_edit_second_paragraph_clicked()
 {
-    qDebug() << "GUIHandlerCourseMaterial::on_edit_3_clicked";
+    qDebug() << "GUIHandlerCourseMaterial::on_edit_second_paragraph_clicked";
+    m_ui->sub_line_text->setReadOnly(false);
+    onEditClicked();
 }
 
-void CourseMaterial::on_edit_5_clicked()
+void CourseMaterial::on_edit_third_paragraph_clicked()
 {
-    qDebug() << "GUIHandlerCourseMaterial::on_edit_5_clicked";
+    qDebug() << "GUIHandlerCourseMaterial::on_edit_second_paragraph_clicked";
+    m_ui->sub_beam_text->setReadOnly(false);
+    onEditClicked();
 }
 
-void CourseMaterial::on_edit_6_clicked()
+void CourseMaterial::on_edit_fourth_paragraph_clicked()
 {
-    qDebug() << "GUIHandlerCourseMaterial::on_edit_6_clicked";
+    qDebug() << "GUIHandlerCourseMaterial::on_edit_fourth_paragraph_clicked";
+    m_ui->sub_line_seg_text->setReadOnly(false);
+    onEditClicked();
 }
 
-void CourseMaterial::on_edit_7_clicked()
+void CourseMaterial::on_edit_fifth_paragraph_clicked()
 {
-    qDebug() << "GUIHandlerCourseMaterial::on_edit_7_clicked";
-}
-
-void CourseMaterial::on_edit_11_clicked()
-{
-    qDebug() << "GUIHandlerCourseMaterial::on_edit_11_clicked";
+    qDebug() << "GUIHandlerCourseMaterial::on_edit_fifth_paragraph_clicked";
+    m_ui->sub_angled_line_text->setReadOnly(false);
+    onEditClicked();
 }
 
 void CourseMaterial::showEvent(QShowEvent* e)
@@ -372,22 +445,51 @@ void CourseMaterial::showEvent(QShowEvent* e)
     {
         qDebug() << "The student account is active. Don't do special preparation";\
 
-        m_ui->edit->setVisible(false);
-        m_ui->edit_2->setVisible(false);
-        m_ui->edit_3->setVisible(false);
-        m_ui->edit_5->setVisible(false);
-        m_ui->edit_6->setVisible(false);
-        m_ui->edit_7->setVisible(false);
-        m_ui->edit_11->setVisible(false);
+        m_ui->dot->setVisible(false);
+        m_ui->line->setVisible(false);
+        m_ui->line_segment->setVisible(false);
+        m_ui->curve_line->setVisible(false);
+        m_ui->triangle->setVisible(false);
+        m_ui->rectangle->setVisible(false);
+        m_ui->dot_2->setVisible(false);
+        m_ui->line_2->setVisible(false);
+        m_ui->line_segment_2->setVisible(false);
+        m_ui->curve_line_2->setVisible(false);
+        m_ui->triangle_2->setVisible(false);
+        m_ui->rectangle_2->setVisible(false);
+        m_ui->dot_3->setVisible(false);
+        m_ui->line_3->setVisible(false);
+        m_ui->line_segment_3->setVisible(false);
+        m_ui->curve_line_3->setVisible(false);
+        m_ui->triangle_3->setVisible(false);
+        m_ui->rectangle_3->setVisible(false);
+        m_ui->dot_4->setVisible(false);
+        m_ui->line_4->setVisible(false);
+        m_ui->line_segment_4->setVisible(false);
+        m_ui->curve_line_4->setVisible(false);
+        m_ui->triangle_4->setVisible(false);
+        m_ui->rectangle_4->setVisible(false);
+        m_ui->dot_5->setVisible(false);
+        m_ui->line_5->setVisible(false);
+        m_ui->line_segment_5->setVisible(false);
+        m_ui->curve_line_5->setVisible(false);
+        m_ui->triangle_5->setVisible(false);
+        m_ui->rectangle_5->setVisible(false);
 
-        m_ui->save->setVisible(false);
-        m_ui->save_2->setVisible(false);
-        m_ui->save_3->setVisible(false);
-        m_ui->save_5->setVisible(false);
-        m_ui->save_6->setVisible(false);
-        m_ui->save_7->setVisible(false);
-        m_ui->save_10->setVisible(false);
-        m_ui->save_11->setVisible(false);
+        m_ui->edit_title->setVisible(false);
+        m_ui->edit_first_paragraph->setVisible(false);
+        m_ui->edit_second_paragraph->setVisible(false);
+        m_ui->edit_third_paragraph->setVisible(false);
+        m_ui->edit_fourth_paragraph->setVisible(false);
+        m_ui->edit_fifth_paragraph->setVisible(false);
+
+
+        m_ui->save_title->setVisible(false);
+        m_ui->save_first_paragraph->setVisible(false);
+        m_ui->save_second_paragraph->setVisible(false);
+        m_ui->save_third_paragraph->setVisible(false);
+        m_ui->save_fourth_paragraph->setVisible(false);
+        m_ui->save_fifth_paragraph->setVisible(false);
     }
 
     pg->setValue(20);
@@ -509,93 +611,130 @@ void CourseMaterial::preparationForAdminAccount()
 {
     qDebug() << "CourseMaterial::preparationForAdminAccount()";
 
-    m_ui->edit->setVisible(true);
-    m_ui->edit_2->setVisible(true);
-    m_ui->edit_3->setVisible(true);
-    m_ui->edit_5->setVisible(true);
-    m_ui->edit_6->setVisible(true);
-    m_ui->edit_7->setVisible(true);
-    //m_ui->edit_8->setVisible(true);
-    //m_ui->edit_9->setVisible(true);
-    //m_ui->edit_10->setVisible(true);
-    m_ui->edit_11->setVisible(true);
+    m_ui->dot->setVisible(true);
+    m_ui->line->setVisible(true);
+    m_ui->line_segment->setVisible(true);
+    m_ui->curve_line->setVisible(true);
+    m_ui->triangle->setVisible(true);
+    m_ui->rectangle->setVisible(true);
+    m_ui->dot_2->setVisible(true);
+    m_ui->line_2->setVisible(true);
+    m_ui->line_segment_2->setVisible(true);
+    m_ui->curve_line_2->setVisible(true);
+    m_ui->triangle_2->setVisible(true);
+    m_ui->rectangle_2->setVisible(true);
+    m_ui->dot_3->setVisible(true);
+    m_ui->line_3->setVisible(true);
+    m_ui->line_segment_3->setVisible(true);
+    m_ui->curve_line_3->setVisible(true);
+    m_ui->triangle_3->setVisible(true);
+    m_ui->rectangle_3->setVisible(true);
+    m_ui->dot_4->setVisible(true);
+    m_ui->line_4->setVisible(true);
+    m_ui->line_segment_4->setVisible(true);
+    m_ui->curve_line_4->setVisible(true);
+    m_ui->triangle_4->setVisible(true);
+    m_ui->rectangle_4->setVisible(true);
+    m_ui->dot_5->setVisible(true);
+    m_ui->line_5->setVisible(true);
+    m_ui->line_segment_5->setVisible(true);
+    m_ui->curve_line_5->setVisible(true);
+    m_ui->triangle_5->setVisible(true);
+    m_ui->rectangle_5->setVisible(true);
 
-    m_ui->save->setVisible(true);
-    m_ui->save_2->setVisible(true);
-    m_ui->save_3->setVisible(true);
-    m_ui->save_5->setVisible(true);
-    m_ui->save_6->setVisible(true);
-    m_ui->save_7->setVisible(true);
-   // m_ui->save_8->setVisible(true);
-   // m_ui->save_9->setVisible(true);
-    m_ui->save_10->setVisible(true);
-    m_ui->save_11->setVisible(true);
+    m_ui->edit_title->setVisible(true);
+    m_ui->edit_first_paragraph->setVisible(true);
+    m_ui->edit_second_paragraph->setVisible(true);
+    m_ui->edit_third_paragraph->setVisible(true);
+    m_ui->edit_fourth_paragraph->setVisible(true);
+    m_ui->edit_fifth_paragraph->setVisible(true);
+
+    m_ui->save_title->setVisible(true);
+    m_ui->save_first_paragraph->setVisible(true);
+    m_ui->save_second_paragraph->setVisible(true);
+    m_ui->save_third_paragraph->setVisible(true);
+    m_ui->save_fourth_paragraph->setVisible(true);
+    m_ui->save_fifth_paragraph->setVisible(true);
+
     qDebug() << "CourseMaterial::preparationForAdminAccount() end";
 }
 
 void CourseMaterial::saveText()
 {
     qDebug() << "CourseMaterial::saveText()";
-    m_progDialog->setValue(0);
+
+    QProgressDialog pg("Saving...", "", 0, 100, this);
+    pg.setWindowModality(Qt::WindowModal);
+    pg.setCancelButton(0);
+    pg.setAttribute(Qt::WA_DeleteOnClose);
+    pg.setValue(0);
+    pg.show();
+
+    pg.setValue(0);
     QStringList strList;
     strList.push_back(type::g_KeyStarts);
-    m_progDialog->setValue(4);
+    pg.setValue(4);
     strList.push_back(type::g_firstSubjectKeyStarts);
-    m_progDialog->setValue(8);
+    pg.setValue(8);
     strList.push_back(type::g_firstSubjectTitleKeyStarts);
-    m_progDialog->setValue(12);
+    pg.setValue(12);
     strList.push_back(m_ui->sub_title_text->toPlainText());
-    m_progDialog->setValue(16);
+    pg.setValue(16);
     strList.push_back(type::g_firstSubjectTitleKeyEnds);
-    m_progDialog->setValue(20);
+    pg.setValue(20);
 
     strList.push_back(type::g_firstSubjectDotKeyStarts);
-    m_progDialog->setValue(24);
+    pg.setValue(24);
     strList.push_back(m_ui->sub_dot_text->toPlainText());
-    m_progDialog->setValue(28);
+    pg.setValue(28);
     strList.push_back(type::g_firstSubjectDotKeyEnds);
-    m_progDialog->setValue(32);
+    pg.setValue(32);
 
     strList.push_back(type::g_firstSubjectLineKeyStarts);
-    m_progDialog->setValue(36);
+    pg.setValue(36);
     strList.push_back(m_ui->sub_line_text->toPlainText());
-    m_progDialog->setValue(40);
+    pg.setValue(40);
     strList.push_back(type::g_firstSubjectLineKeyEnds);
-    m_progDialog->setValue(44);
+    pg.setValue(44);
 
     strList.push_back(type::g_firstSubjectBeamKeyStarts);
-    m_progDialog->setValue(48);
+    pg.setValue(48);
     strList.push_back(m_ui->sub_beam_text->toPlainText());
-    m_progDialog->setValue(52);
+    pg.setValue(52);
     strList.push_back(type::g_firstSubjectBeamKeyEnds);
-    m_progDialog->setValue(56);
+    pg.setValue(56);
 
     strList.push_back(type::g_firstSubjectLineSegKeyStarts);
-    m_progDialog->setValue(60);
+    pg.setValue(60);
     strList.push_back(m_ui->sub_line_seg_text->toPlainText());
-    m_progDialog->setValue(64);
+    pg.setValue(64);
     strList.push_back(type::g_firstSubjectLineSegKeyEnds);
-    m_progDialog->setValue(68);
+    pg.setValue(68);
 
     strList.push_back(type::g_firstSubjectAngledLineKeyStarts);
-    m_progDialog->setValue(72);
+    pg.setValue(72);
     strList.push_back(m_ui->sub_angled_line_text->toPlainText());
-    m_progDialog->setValue(76);
+    pg.setValue(76);
     strList.push_back(type::g_firstSubjectAngledLineKeyEnds);
-    m_progDialog->setValue(82);
+    pg.setValue(82);
 
     strList.push_back(type::g_firstSubjectKeyEnds);
-    m_progDialog->setValue(86);
+    pg.setValue(86);
     strList.push_back(type::g_KeyEnds);
-    m_progDialog->setValue(90);
+    pg.setValue(90);
 
     if (m_Facade->saveText(strList))
     {
-        m_progDialog->setValue(100);
+        pg.setValue(100);
+        pg.close();
     }
     else
     {
-        // TODO close and show an error popup
+        pg.show();
+
+        QMessageBox msgBox(QMessageBox::Warning,"Warning", "Something went wrong", QMessageBox::Ok, this);
+        msgBox.button(QMessageBox::Ok)->animateClick(3000);
+        msgBox.exec();
     }
 }
 
@@ -783,4 +922,148 @@ void CourseMaterial::prepareALlShapes()
     //m_pathItem->setFlag(QGraphicsItem::ItemIsMovable);
     m_angledPathItem->setOpacity(1);
     qDebug() << "CourseMaterial::prepareALlShapes() end";
+}
+
+void CourseMaterial::onSaveClicked()
+{
+    qDebug() << "CourseMaterial::onSaveClicked()";
+
+    saveText();
+    // TODO for all topics
+}
+
+void CourseMaterial::onEditClicked()
+{
+    qDebug() << "CourseMaterial::onEditClicked()";
+
+    QMessageBox msgBox;
+    msgBox.setText("Now you can edit this paragraph");
+    msgBox.setIcon(QMessageBox::Information);
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.button(QMessageBox::Ok)->animateClick(3000);
+    msgBox.exec();
+}
+
+void CourseMaterial::onDotClicked(QSharedPointer<QGraphicsScene> scene)
+{
+    qDebug() << "CourseMaterial::onDotClicked()";
+
+    const int x = QInputDialog::getInt(this, "Enter data", " x =");
+    const int y = QInputDialog::getInt(this, "Enter data", "y =");
+
+    QProgressDialog pg("Processing...", "", 0, 100, this);
+    pg.setWindowModality(Qt::WindowModal);
+    pg.setCancelButton(0);
+    pg.setAttribute(Qt::WA_DeleteOnClose);
+    pg.setValue(0);
+    pg.show();
+
+    m_dot.moveTo(x, y);
+    pg.setValue(9);
+    scene->clear();
+    pg.setValue(18);
+    m_textDot = scene->addText("A");
+    pg.setValue(36);
+    m_textDot->setPos(x, y - 20);
+    pg.setValue(54);
+    m_textDot->setOpacity(m_opacity);
+    pg.setValue(72);
+    m_DotItem = scene->addEllipse(m_dot, QPen(Qt::NoPen), QBrush(Qt::black));
+    pg.setValue(90);
+    m_DotItem->setOpacity(m_opacity);
+    pg.setValue(100);
+    pg.close();
+}
+
+void CourseMaterial::onLineClicked(QSharedPointer<QGraphicsScene> scene) // TODO m_text_line m_line1Item
+{
+    qDebug() << "CourseMaterial::onLineClicked()";
+
+    const int x = QInputDialog::getInt(this, "Enter data", "First dot x =");
+    const int y = QInputDialog::getInt(this, "Enter data", "First dot y =");
+    const int x2 = QInputDialog::getInt(this, "Enter data", "Second dot x =");
+    const int y2 = QInputDialog::getInt(this, "Enter data", "Second dot y =");
+
+    QProgressDialog* pg = new QProgressDialog("Processing...", "", 0, 100, this); // TODO redo to odject
+    pg->setWindowModality(Qt::WindowModal);
+    pg->setCancelButton(0);
+    pg->setAttribute(Qt::WA_DeleteOnClose);
+    pg->setValue(0);
+    pg->show();
+
+    m_line.setLine(x, y, x2, y2);
+    pg->setValue(15);
+    scene->clear();
+    pg->setValue(30);
+    m_line1Item = scene->addLine(m_line, QPen(Qt::black, 4));
+    pg->setValue(45);
+    m_line1Item->setOpacity(1);
+    pg->setValue(60);
+    m_text_line = scene->addText("a");
+    pg->setValue(75);
+    m_text_line->setPos(m_line.x1(), m_line.y1() - 30);
+    pg->setValue(90);
+    m_text_line->setOpacity(1);
+    pg->setValue(100);
+    pg->close();
+}
+
+void CourseMaterial::onLineSegClicked(QSharedPointer<QGraphicsScene> scene)
+{
+    qDebug() << "CourseMaterial::onLineSegClicked()";
+
+    const int x = QInputDialog::getInt(this, "Enter data", "First dot x =");
+    const int y = QInputDialog::getInt(this, "Enter data", "First dot y =");
+    const int x2 = QInputDialog::getInt(this, "Enter data", "Second dot x =");
+    const int y2 = QInputDialog::getInt(this, "Enter data", "Second dot y =");
+
+    QProgressDialog* pg = new QProgressDialog("Processing...", "", 0, 100, this); // TODO redo to odject
+    pg->setWindowModality(Qt::WindowModal);
+    pg->setCancelButton(0);
+    pg->setAttribute(Qt::WA_DeleteOnClose);
+    pg->setValue(0);
+    pg->show();
+
+    m_line.setLine(x, y, x2, y2);
+    pg->setValue(15);
+    scene->clear();
+    pg->setValue(30);
+    m_line1Item = scene->addLine(m_line, QPen(Qt::black, 4));
+    pg->setValue(45);
+    m_line1Item->setOpacity(1);
+    pg->setValue(60);
+    m_text_line = scene->addText("a");
+    pg->setValue(75);
+    m_text_line->setPos(m_line.x1(), m_line.y1() - 30);
+    pg->setValue(90);
+    m_text_line->setOpacity(1);
+    pg->setValue(100);
+    pg->close();
+}
+
+void CourseMaterial::onCurveLineClicked(QSharedPointer<QGraphicsScene> scene)
+{
+    qDebug() << "CourseMaterial::onCurveLineClicked()";
+    Q_UNUSED(scene);
+    QMessageBox msgBox(QMessageBox::Warning,"Warning", "This functionality is underway.", QMessageBox::Ok, this);
+    msgBox.button(QMessageBox::Ok)->animateClick(3000);
+    msgBox.exec();
+}
+
+void CourseMaterial::onTriangleClicked(QSharedPointer<QGraphicsScene> scene)
+{
+    qDebug() << "CourseMaterial::onTriangleClicked()";
+    Q_UNUSED(scene);
+    QMessageBox msgBox(QMessageBox::Warning,"Warning", "This functionality is underway.", QMessageBox::Ok, this);
+    msgBox.button(QMessageBox::Ok)->animateClick(3000);
+    msgBox.exec();
+}
+
+void CourseMaterial::onRectangleClicked(QSharedPointer<QGraphicsScene> scene)
+{
+    qDebug() << "CourseMaterial::onRectangleClicked()";
+    Q_UNUSED(scene);
+    QMessageBox msgBox(QMessageBox::Warning,"Warning", "This functionality is underway.", QMessageBox::Ok, this);
+    msgBox.button(QMessageBox::Ok)->animateClick(3000);
+    msgBox.exec();
 }

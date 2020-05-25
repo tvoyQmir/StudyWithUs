@@ -65,9 +65,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>-361</y>
+      <y>-1686</y>
       <width>986</width>
-      <height>3448</height>
+      <height>2944</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -208,7 +208,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QPushButton" name="edit">
+          <widget class="QPushButton" name="edit_title">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -237,7 +237,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="save">
+          <widget class="QPushButton" name="save_title">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -312,7 +312,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
-          <widget class="QPushButton" name="edit_2">
+          <widget class="QPushButton" name="edit_first_paragraph">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -341,7 +341,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="save_2">
+          <widget class="QPushButton" name="save_first_paragraph">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -615,7 +615,7 @@ p, li { white-space: pre-wrap; }
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_4">
            <item>
-            <widget class="QPushButton" name="edit_3">
+            <widget class="QPushButton" name="edit_second_paragraph">
              <property name="minimumSize">
               <size>
                <width>32</width>
@@ -644,7 +644,7 @@ p, li { white-space: pre-wrap; }
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="save_3">
+            <widget class="QPushButton" name="save_second_paragraph">
              <property name="minimumSize">
               <size>
                <width>32</width>
@@ -714,7 +714,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_9">
          <item>
-          <widget class="QPushButton" name="save_18">
+          <widget class="QPushButton" name="line_segment_2">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -732,7 +732,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/save.png</normaloff>:/src/img/save.png</iconset>
+             <normaloff>:/src/img/line_segment.png</normaloff>:/src/img/line_segment.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -743,7 +743,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="edit_22">
+          <widget class="QPushButton" name="curve_line_2">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -761,7 +761,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
+             <normaloff>:/src/img/curve_line.png</normaloff>:/src/img/curve_line.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -772,7 +772,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="edit_21">
+          <widget class="QPushButton" name="dot_2">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -790,7 +790,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
+             <normaloff>:/src/img/dot.png</normaloff>:/src/img/dot.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -801,7 +801,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="edit_18">
+          <widget class="QPushButton" name="triangle_2">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -819,7 +819,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
+             <normaloff>:/src/img/triangle.png</normaloff>:/src/img/triangle.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -830,7 +830,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="save_16">
+          <widget class="QPushButton" name="line_2">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -848,7 +848,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/save.png</normaloff>:/src/img/save.png</iconset>
+             <normaloff>:/src/img/line.png</normaloff>:/src/img/line.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -859,7 +859,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="save_17">
+          <widget class="QPushButton" name="rectangle_2">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -877,123 +877,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/save.png</normaloff>:/src/img/save.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="edit_19">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="edit_23">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="edit_20">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="save_19">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/save.png</normaloff>:/src/img/save.png</iconset>
+             <normaloff>:/src/img/rectangle.png</normaloff>:/src/img/rectangle.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -1071,7 +955,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_6">
          <item>
-          <widget class="QPushButton" name="edit_5">
+          <widget class="QPushButton" name="edit_third_paragraph">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1100,7 +984,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="save_5">
+          <widget class="QPushButton" name="save_third_paragraph">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1168,7 +1052,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_10">
          <item>
-          <widget class="QPushButton" name="save_21">
+          <widget class="QPushButton" name="line_segment_3">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1186,7 +1070,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/save.png</normaloff>:/src/img/save.png</iconset>
+             <normaloff>:/src/img/line_segment.png</normaloff>:/src/img/line_segment.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -1197,7 +1081,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="edit_24">
+          <widget class="QPushButton" name="triangle_3">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1215,7 +1099,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
+             <normaloff>:/src/img/triangle.png</normaloff>:/src/img/triangle.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -1226,7 +1110,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="save_20">
+          <widget class="QPushButton" name="curve_line_3">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1244,7 +1128,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/save.png</normaloff>:/src/img/save.png</iconset>
+             <normaloff>:/src/img/curve_line.png</normaloff>:/src/img/curve_line.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -1255,7 +1139,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="edit_25">
+          <widget class="QPushButton" name="line_3">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1273,7 +1157,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
+             <normaloff>:/src/img/line.png</normaloff>:/src/img/line.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -1284,7 +1168,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="edit_28">
+          <widget class="QPushButton" name="dot_3">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1302,7 +1186,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
+             <normaloff>:/src/img/dot.png</normaloff>:/src/img/dot.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -1313,7 +1197,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="save_22">
+          <widget class="QPushButton" name="rectangle_3">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1331,123 +1215,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/save.png</normaloff>:/src/img/save.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="edit_27">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="edit_26">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="edit_29">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="save_23">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/save.png</normaloff>:/src/img/save.png</iconset>
+             <normaloff>:/src/img/rectangle.png</normaloff>:/src/img/rectangle.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -1525,7 +1293,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_7">
          <item>
-          <widget class="QPushButton" name="edit_6">
+          <widget class="QPushButton" name="edit_fourth_paragraph">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1554,7 +1322,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="save_6">
+          <widget class="QPushButton" name="save_fourth_paragraph">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1622,7 +1390,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_11">
          <item>
-          <widget class="QPushButton" name="save_25">
+          <widget class="QPushButton" name="curve_line_4">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1640,7 +1408,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/save.png</normaloff>:/src/img/save.png</iconset>
+             <normaloff>:/src/img/curve_line.png</normaloff>:/src/img/curve_line.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -1651,7 +1419,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="save_24">
+          <widget class="QPushButton" name="triangle_4">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1669,7 +1437,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/save.png</normaloff>:/src/img/save.png</iconset>
+             <normaloff>:/src/img/triangle.png</normaloff>:/src/img/triangle.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -1680,7 +1448,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="edit_32">
+          <widget class="QPushButton" name="line_4">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1698,7 +1466,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
+             <normaloff>:/src/img/line.png</normaloff>:/src/img/line.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -1709,7 +1477,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="edit_30">
+          <widget class="QPushButton" name="line_segment_4">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1727,7 +1495,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
+             <normaloff>:/src/img/line_segment.png</normaloff>:/src/img/line_segment.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -1738,7 +1506,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="edit_31">
+          <widget class="QPushButton" name="dot_4">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1756,7 +1524,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
+             <normaloff>:/src/img/dot.png</normaloff>:/src/img/dot.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -1767,7 +1535,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="edit_35">
+          <widget class="QPushButton" name="rectangle_4">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -1785,123 +1553,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="save_26">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/save.png</normaloff>:/src/img/save.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="edit_34">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="save_27">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/save.png</normaloff>:/src/img/save.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="save_10">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/save.png</normaloff>:/src/img/save.png</iconset>
+             <normaloff>:/src/img/rectangle.png</normaloff>:/src/img/rectangle.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -1979,7 +1631,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_8">
          <item>
-          <widget class="QPushButton" name="edit_7">
+          <widget class="QPushButton" name="edit_fifth_paragraph">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2008,7 +1660,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="save_7">
+          <widget class="QPushButton" name="save_fifth_paragraph">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2076,7 +1728,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_12">
          <item>
-          <widget class="QPushButton" name="edit_37">
+          <widget class="QPushButton" name="dot_5">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2094,7 +1746,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
+             <normaloff>:/src/img/dot.png</normaloff>:/src/img/dot.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -2105,7 +1757,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="save_28">
+          <widget class="QPushButton" name="triangle_5">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2123,7 +1775,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/save.png</normaloff>:/src/img/save.png</iconset>
+             <normaloff>:/src/img/triangle.png</normaloff>:/src/img/triangle.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -2134,7 +1786,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="edit_40">
+          <widget class="QPushButton" name="line_segment_5">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2152,7 +1804,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
+             <normaloff>:/src/img/line_segment.png</normaloff>:/src/img/line_segment.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -2163,7 +1815,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="edit_39">
+          <widget class="QPushButton" name="curve_line_5">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2181,7 +1833,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
+             <normaloff>:/src/img/curve_line.png</normaloff>:/src/img/curve_line.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -2192,7 +1844,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="edit_33">
+          <widget class="QPushButton" name="line_5">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2210,7 +1862,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
+             <normaloff>:/src/img/line.png</normaloff>:/src/img/line.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -2221,7 +1873,7 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="edit_38">
+          <widget class="QPushButton" name="rectangle_5">
            <property name="minimumSize">
             <size>
              <width>32</width>
@@ -2239,123 +1891,7 @@ p, li { white-space: pre-wrap; }
            </property>
            <property name="icon">
             <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="edit_36">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="save_31">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/save.png</normaloff>:/src/img/save.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="edit_11">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/edit.png</normaloff>:/src/img/edit.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="save_11">
-           <property name="minimumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/resource.qrc">
-             <normaloff>:/src/img/save.png</normaloff>:/src/img/save.png</iconset>
+             <normaloff>:/src/img/rectangle.png</normaloff>:/src/img/rectangle.png</iconset>
            </property>
            <property name="iconSize">
             <size>

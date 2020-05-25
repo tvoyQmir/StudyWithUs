@@ -53,6 +53,14 @@ void Menu::on_viewCourseResult_clicked()
     m_GUIHandlerCourseResultWindow->show();
 }
 
+void Menu::on_relogin_clicked()
+{
+    qDebug() << "GUIHandlerMenu::on_relogin_clicked";
+
+    this->close();
+    emit GUIHandlerMenuSignal();
+}
+
 void Menu::on_help_clicked()
 {
     qDebug() << "GUIHandlerMenu::on_help_clicked";
